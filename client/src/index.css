@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Roboto Fonts";
+  src: url("./fonts/Roboto-Black.ttf") format("truetype");
+  src: url("./fonts/Roboto-BlackItalic.ttf") format("truetype");
+  src: url("./fonts/Roboto-Bold.ttf") format("truetype");
+  src: url("./fonts/Roboto-BoldItalic.ttf") format("truetype");
+  src: url("./fonts/Roboto-Italic.ttf") format("truetype");
+  src: url("./fonts/Roboto-Light.ttf") format("truetype");
+  src: url("./fonts/Roboto-LightItalic.ttf") format("truetype");
+  src: url("./fonts/Roboto-Medium.ttf") format("truetype");
+  src: url("./fonts/Roboto-MediumItalic.ttf") format("truetype");
+  src: url("./fonts/Roboto-Regular.ttf") format("truetype");
+  src: url("./fonts/Roboto-Thin.ttf") format("truetype");
+  src: url("./fonts/Roboto-ThinItalic.ttf") format("truetype");
+  font-weight: bold;
+}
+
+* {
+  font-family: "Roboto", sans-serif;
+}
+
+.nav {
+  background-color: #181f28;
+}
