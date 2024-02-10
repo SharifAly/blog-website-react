@@ -23,6 +23,21 @@
   font-family: "Roboto", sans-serif;
 }
 
-.nav {
-  background-color: #181f28;
+body {
+  /* background-color: rgba(252, 252, 248, 0.4); */
+  background-image: url("./pictures/logo/abstract-luxury-gradient-blue-background-smooth-dark-blue-with-black-vignette-studio-banner.jpg");
+  background-size: cover;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+nav {
+  /* background-color: rgb(17, 24, 39); */
+  background: transparent;
+}
+
+footer {
+  background: transparent;
 }
