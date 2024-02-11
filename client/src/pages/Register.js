@@ -97,3 +97,11 @@ const Register = () => {
 };
 
 export default Register;
+// json data to insert to register user from form
+// {
+//   "f_name": "sharif",
+//   "l_name": "aly",
+//   "email": "sharif.aly_@outlook.com",
+//   "role": "User",
+//   "password": "1234"
+// }
