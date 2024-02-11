@@ -3,13 +3,18 @@ import cors from "cors";
 import mysql from "mysql2";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
+import { jwtDecode } from "jwt-decode";
 import dotenv from "dotenv";
 dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 5000;
 
-app.use(cors());
+const corsOptions = {
+  origin: "http://localhost:5000",
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 
 const db = mysql.createPool({
@@ -32,48 +37,135 @@ app.get("/", (req, res) => {
   });
 });
 
-// User registration
-// app.post("/register", async (req, res) => {
-//   try {
-//     const firstName = req.body.firstName; // firstName
-//     const lastName = req.body.lastName; // lastName
-//     const email = req.body.email; // email
-//     const role = req.body.role; // role
-//     const password = req.body.password; // password
-//     const hashedPassword = await bcrypt.hash(password, 10);
-//     const sql = `INSERT INTO blog.users (first_name, last_name, email, role, password ) VALUES (?, ?, ?, ?, ? ),;`;
-//     db.query(sql, [firstName, lastName, email, role, hashedPassword]);
-//     console.log("User registered successfully");
-//     console.log(firstName, lastName, email, role, password);
-//     res.status(200).json(firstName, lastName, email, role, password);
-//   } catch (error) {
-//     console.log(error);
-//   }
-// });
 app.post("/register", (req, res) => {
   // get the data from the request body
-  const fName = req.body.f_name;
-  const lName = req.body.l_name;
-  const email = req.body.email;
-  const role = req.body.role;
-  const password = req.body.password;
-  // hash the incoming password
-  const hashedPassword = bcrypt.hashSync(password, 10);
-  // sql query to insert new user to database
-  const sql =
-    "INSERT INTO blog.users (first_name, last_name, email, role, password) VALUES (?,?,?,?,?)";
-  // execute the query
-  db.query(sql, [fName, lName, email, role, hashedPassword], (err, result) => {
-    // if there is an error show it in the console
-    if (err) {
-      console.log(err);
-      res.status(500).send("Internal Server Error");
-      // if there is no error send the result to the client
-    } else {
-      res.send(result);
-    }
-  });
+  try {
+    const { f_name, l_name, email, role, password } = req.body;
+    // hash the incoming password
+    const hashedPassword = bcrypt.hashSync(password, 10);
+    // sql query to check if email already exists
+    const checkEmailExcist = "SELECT * FROM blog.users WHERE email = ?";
+    db.query(checkEmailExcist, [email], (err, result) => {
+      if (err) {
+        console.log(err);
+        res.status(500).send("Internal Server Error");
+      } else {
+        if (result.length > 0) {
+          // email already exists
+          res.status(400).send("Email already exists");
+        } else {
+          // email does not exist, insert new user to database
+          const registerNewUserQuery =
+            "INSERT INTO blog.users (first_name, last_name, email, password) VALUES (?,?,?,?)";
+          db.query(
+            registerNewUserQuery,
+            [f_name, l_name, email, hashedPassword],
+            (err, result) => {
+              if (err) {
+                console.log(err);
+                res.status(500).send("Internal Server Error");
+              } else {
+                res.send(result);
+              }
+            }
+          );
+        }
+      }
+    });
+  } catch (error) {
+    console.log(error);
+  }
 });
+
+// login
+
+// values to decode jwt
+// {2 items
+// "header":{2 items
+// "alg":"HS256"
+// "typ":"JWT"
+// }
+// "payload":{4 items
+// "userEmail":"sharif.aly_@outlook.com"
+// "userId":11
+// "iat":1707648117
+// "exp":1707651717
+// }
+// }
+
+app.post("/login", async (req, res) => {
+  try {
+    const email = req.body.email; // Get email from request body
+    const password = req.body.password; // Get password from request body
+
+    const sql = `SELECT * FROM blog.users WHERE email =?`; // SQL query to retrieve user data from the database based on email
+
+    const result = await new Promise((resolve, reject) => {
+      db.query(sql, [email], (err, result) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(result);
+        }
+      });
+    });
+
+    if (result.length === 0) {
+      // If no user is found with the given email, send an error response
+      return res.status(400).send({
+        message: "Username or password incorrect!",
+      });
+    }
+
+    const bResult = await new Promise((resolve, reject) => {
+      bcrypt.compare(password, result[0]["password"], (bErr, bResult) => {
+        if (bErr) {
+          reject(bErr);
+        } else {
+          resolve(bResult);
+        }
+      });
+    });
+
+    if (bResult) {
+      // If password matches
+      const token = jwt.sign(
+        {
+          userEmail: result[0].email,
+          userId: result[0].id,
+        },
+        process.env.JWT_SECRET_KEY, // Sign the JWT token with the secret key from environment variables
+        { expiresIn: "1h" } // Set the expiration time for the token
+      );
+
+      return res.status(200).send({
+        message: "Logged in!",
+        token,
+        user: result[0],
+      });
+    }
+
+    // If password doesn't match, send an error response
+    return res.status(400).send({
+      message: "Username or password incorrect!",
+    });
+  } catch (error) {
+    // If there's an error, send an error response
+    return res.status(400).send({
+      message: "An error occurred!",
+      error,
+    });
+  }
+});
+
+// test jwt decode function
+
+// app.get("/jwt", (req, res) => {
+//   const token =
+//     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRW1haWwiOiJzaGFyaWYuYWx5X0BvdXRsb29rLmNvbSIsInVzZXJJZCI6MTEsImlhdCI6MTcwNzY0ODU5NiwiZXhwIjoxNzA3NjUyMTk2fQ.5DQl_YGiLX40C681H7SuJSykmyhAMV2lj-PgTj4EJNc";
+//   const decoded = jwtDecode(token);
+//   res.send(decoded);
+// });
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
