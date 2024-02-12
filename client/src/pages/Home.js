@@ -1,19 +1,250 @@
+// import { Link } from "react-router-dom";
+
 const Home = () => {
   return (
     <>
-      <h1 className="text-white text-center font-bold text-2xl italic shadow-md underline">
+      {/* <div className="shadow-xl rounded-lg bg-white dark:bg-gray-900">
+        <div className="container px-4 py-6 space-y-2 text-center md:space-y-0 md:flex md:items-center md:justify-between lg:space-y-0">
+          <div className="flex items-center space-2">
+            <Link className="flex items-center space-2" href="#">
+              <div className="h-6 w-6 rounded-lg bg-gray-900 dark:bg-gray-50" />
+              <span className="font-semibold text-lg text-white">Blog</span>
+            </Link>
+          </div>
+          <nav className="flex items-center justify-center space-x-4 text-sm md:space-x-6 lg:space-x-8">
+            <Link
+              className="font-medium text-gray-900 dark:text-gray-50 hover:underline"
+              href="#"
+            >
+              Home
+            </Link>
+            <Link
+              className="font-medium text-gray-900 dark:text-gray-50 hover:underline"
+              href="#"
+            >
+              Posts
+            </Link>
+            <Link
+              className="font-medium text-gray-900 dark:text-gray-50 hover:underline"
+              href="#"
+            >
+              About
+            </Link>
+            <Link
+              className="font-medium text-gray-900 dark:text-gray-50 hover:underline"
+              href="#"
+            >
+              Contact
+            </Link>
+          </nav>
+          <div className="flex items-center space-x-4">
+            <Link
+              className="font-medium text-gray-900 dark:text-gray-50 hover:underline"
+              href="#"
+            >
+              Sign in
+            </Link>
+          </div>
+        </div>
+      </div>
+      <div className="container grid max-w-6xl items-center justify-center gap-4 px-4 text-center md:gap-8 md:px-6 lg:gap-12">
+        <div className="space-y-4 lg:space-y-5 xl:space-y-6">
+          <div className="space-y-2">
+            <Link
+              className="text-3xl font-bold tracking-tighter sm:text-5xl md:text-6xl"
+              href="#"
+            >
+              Welcome to the Blog
+            </Link>
+            <p className="mx-auto max-w-[800px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
+              A place for all your thoughts. Share your ideas with the world.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div className="container grid max-w-6xl items-center justify-center gap-8 py-10 px-4 text-center md:py-16 md:px-6 lg:gap-12">
+        <div className="space-y-4">
+          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
+            Latest Posts
+          </h2>
+        </div>
+        <div className="divide-y rounded-lg border">
+          <div className="grid grid-cols-1 items-stretch justify-center divide-y md:grid-cols-2">
+            <div className="flex flex-col gap-1 p-4">
+              <Link className="font-semibold" href="#">
+                The First Post on the Blog
+              </Link>
+              <p className="text-sm text-gray-500 dark:text-gray-400">
+                February 1st, 2023
+              </p>
+              <img
+                alt="First"
+                className="object-cover w-full h-60"
+                height={300}
+                src="/placeholder.svg"
+                style={{
+                  aspectRatio: "400/300",
+                  objectFit: "cover",
+                }}
+                width={400}
+              />
+            </div>
+            <div className="flex flex-col gap-1 p-4">
+              <Link className="font-semibold" href="#">
+                Introducing the Blog
+              </Link>
+              <p className="text-sm text-gray-500 dark:text-gray-400">
+                January 23rd, 2023
+              </p>
+              <img
+                alt="Introducing"
+                className="object-cover w-full h-60"
+                height={300}
+                src="/placeholder.svg"
+                style={{
+                  aspectRatio: "400/300",
+                  objectFit: "cover",
+                }}
+                width={400}
+              />
+            </div>
+          </div>
+          <div className="grid grid-cols-1 items-stretch justify-center divide-y md:grid-cols-2">
+            <div className="flex flex-col gap-1 p-4">
+              <Link className="font-semibold" href="#">
+                How to Start Writing
+              </Link>
+              <p className="text-sm text-gray-500 dark:text-gray-400">
+                February 10th, 2023
+              </p>
+              <img
+                alt="How"
+                className="object-cover w-full h-60"
+                height={300}
+                src="/placeholder.svg"
+                style={{
+                  aspectRatio: "400/300",
+                  objectFit: "cover",
+                }}
+                width={400}
+              />
+            </div>
+            <div className="flex flex-col gap-1 p-4">
+              <Link className="font-semibold" href="#">
+                The Joys of Journaling
+              </Link>
+              <p className="text-sm text-gray-500 dark:text-gray-400">
+                January 30th, 2023
+              </p>
+              <img
+                alt="The"
+                className="object-cover w-full h-60"
+                height={300}
+                src="/placeholder.svg"
+                style={{
+                  aspectRatio: "400/300",
+                  objectFit: "cover",
+                }}
+                width={400}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="border-t border-gray-200 bg-gray-50 dark:border-gray-800 dark:bg-gray-950">
+        <div className="container grid max-w-6xl items-center justify-center gap-8 py-10 px-4 text-center md:py-16 md:px-6 lg:gap-12">
+          <div className="space-y-4">
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
+              About the Blog
+            </h2>
+            <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
+              Welcome to the Blog. This is a place for all your thoughts. Share
+              your ideas with the world.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div className="bg-gray-50 dark:bg-gray-950">
+        <div className="container grid max-w-6xl items-center justify-center gap-8 py-10 px-4 text-center md:py-16 md:px-6 lg:gap-12">
+          <div className="space-y-4">
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
+              Contact Us
+            </h2>
+            <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
+              Ready to get started? Contact us now.
+            </p>
+          </div>
+          <form className="mx-auto max-w-sm space-y-4">
+            <div className="grid grid-cols-1 items-stretch justify-center">
+              <div className="flex flex-col gap-1">
+                <label className="text-sm font-medium" htmlFor="name">
+                  Name
+                </label>
+                <input id="name" placeholder="Enter your name" />
+              </div>
+              <div className="flex flex-col gap-1">
+                <label className="text-sm font-medium" htmlFor="email">
+                  Email
+                </label>
+                <input id="email" placeholder="Enter your email" />
+              </div>
+              <div className="flex flex-col gap-1">
+                <label className="text-sm font-medium" htmlFor="message">
+                  Message
+                </label>
+                <textarea
+                  className="min-h-[100px] resize-none"
+                  id="message"
+                  placeholder="Enter your message"
+                />
+              </div>
+              <button className="w-full" type="submit">
+                Submit
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div className="bg-gray-50 dark:bg-gray-950">
+        <div className="container px-4 py-6 space-y-2 text-center md:space-y-0 md:flex md:items-center md:justify-between lg:space-y-0">
+          <nav className="flex items-center justify-center space-x-4 text-sm md:space-x-6 lg:space-x-8">
+            <Link
+              className="font-medium text-gray-900 dark:text-gray-50 hover:underline"
+              href="#"
+            >
+              Terms
+            </Link>
+            <Link
+              className="font-medium text-gray-900 dark:text-gray-50 hover:underline"
+              href="#"
+            >
+              Privacy
+            </Link>
+            <Link
+              className="font-medium text-gray-900 dark:text-gray-50 hover:underline"
+              href="#"
+            >
+              Support
+            </Link>
+          </nav>
+          <p className="text-sm text-gray-500 dark:text-gray-400">
+            © 2023 Blog. All rights reserved.
+          </p>
+        </div>
+      </div> */}
+      {/* <h1 className="text-white text-center font-bold text-3xl italic shadow-md underline">
         Latest Posts
-      </h1>
+      </h1> */}
       <div className="flex justify-center items-center">
         <div className="2xl:mx-auto 2xl:container lg:px-20 lg:py-16 md:py-12 md:px-6 py-9 px-4 w-96 sm:w-auto">
           <div className="flex flex-col items-center justify-center">
-            {/* <h1 className="text-4xl font-semibold leading-9 text-center text-gray-800">
+            <h1 className="text-4xl font-semibold leading-9 text-center text-white">
               This Week Blogs
-            </h1> */}
-            {/* <p className="text-base leading-normal text-center text-gray-600 mt-4 lg:w-1/2 md:w-10/12 w-11/12">
+            </h1>
+            <p className="text-base leading-normal text-center text-white mt-4 lg:w-1/2 md:w-10/12 w-11/12">
               If you're looking for random paragraphs, you've come to the right
               place. When a random word or a random sentence isn't quite enough
-            </p> */}
+            </p>
           </div>
           <div className="lg:flex items-stretch md:mt-12 mt-8">
             <div className="lg:w-1/2">
@@ -288,3 +519,201 @@ const Home = () => {
 };
 
 export default Home;
+
+// import Link from "next/link"
+// import { Input } from "@/components/ui/input"
+// import { Textarea } from "@/components/ui/textarea"
+// import { Button } from "@/components/ui/button"
+
+// export default function Component() {
+//   return (
+//     <>
+//
+//     </>
+//   )
+// }
+
+/* <div class="bg-gray-50 dark:bg-gray-950">
+  <div class="container px-4 py-6 space-y-2 text-center md:space-y-0 md:flex md:items-center md:justify-between lg:space-y-0">
+    <div class="flex items-center space-2">
+      <a class="flex items-center space-2" href="#">
+        <div class="h-6 w-6 rounded-lg bg-gray-900 dark:bg-gray-50"></div>
+        <span class="font-semibold text-lg text-gray-900 dark:text-gray-50">Blog</span>
+      </a>
+    </div>
+    <nav class="flex items-center justify-center space-x-4 text-sm md:space-x-6 lg:space-x-8">
+      <a class="font-medium text-gray-900 dark:text-gray-50 hover:underline" href="#">
+        Home
+      </a>
+      <a class="font-medium text-gray-900 dark:text-gray-50 hover:underline" href="#">
+        Posts
+      </a>
+      <a class="font-medium text-gray-900 dark:text-gray-50 hover:underline" href="#">
+        About
+      </a>
+      <a class="font-medium text-gray-900 dark:text-gray-50 hover:underline" href="#">
+        Contact
+      </a>
+    </nav>
+    <div class="flex items-center space-x-4">
+      <a class="font-medium text-gray-900 dark:text-gray-50 hover:underline" href="#">
+        Sign in
+      </a>
+    </div>
+  </div>
+</div>
+<div class="container grid max-w-6xl items-center justify-center gap-4 px-4 text-center md:gap-8 md:px-6 lg:gap-12">
+  <div class="space-y-4 lg:space-y-5 xl:space-y-6">
+    <div class="space-y-2">
+      <a class="text-3xl font-bold tracking-tighter sm:text-5xl md:text-6xl" href="#">
+        Welcome to the Blog
+      </a>
+      <p class="mx-auto max-w-[800px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
+        A place for all your thoughts. Share your ideas with the world.
+      </p>
+    </div>
+  </div>
+</div>
+<div class="container grid max-w-6xl items-center justify-center gap-8 py-10 px-4 text-center md:py-16 md:px-6 lg:gap-12">
+  <div class="space-y-4">
+    <h2 class="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Latest Posts</h2>
+  </div>
+  <div class="divide-y rounded-lg border">
+    <div class="grid grid-cols-1 items-stretch justify-center divide-y md:grid-cols-2">
+      <div class="flex flex-col gap-1 p-4">
+        <a class="font-semibold" href="#">
+          The First Post on the Blog
+        </a>
+        <p class="text-sm text-gray-500 dark:text-gray-400">February 1st, 2023</p>
+        <img
+          src="/placeholder.svg"
+          width="400"
+          height="300"
+          alt="First Post Image"
+          class="object-cover w-full h-60"
+          style="aspect-ratio: 400 / 300; object-fit: cover;"
+        />
+      </div>
+      <div class="flex flex-col gap-1 p-4">
+        <a class="font-semibold" href="#">
+          Introducing the Blog
+        </a>
+        <p class="text-sm text-gray-500 dark:text-gray-400">January 23rd, 2023</p>
+        <img
+          src="/placeholder.svg"
+          width="400"
+          height="300"
+          alt="Introducing the Blog Image"
+          class="object-cover w-full h-60"
+          style="aspect-ratio: 400 / 300; object-fit: cover;"
+        />
+      </div>
+    </div>
+    <div class="grid grid-cols-1 items-stretch justify-center divide-y md:grid-cols-2">
+      <div class="flex flex-col gap-1 p-4">
+        <a class="font-semibold" href="#">
+          How to Start Writing
+        </a>
+        <p class="text-sm text-gray-500 dark:text-gray-400">February 10th, 2023</p>
+        <img
+          src="/placeholder.svg"
+          width="400"
+          height="300"
+          alt="How to Start Writing Image"
+          class="object-cover w-full h-60"
+          style="aspect-ratio: 400 / 300; object-fit: cover;"
+        />
+      </div>
+      <div class="flex flex-col gap-1 p-4">
+        <a class="font-semibold" href="#">
+          The Joys of Journaling
+        </a>
+        <p class="text-sm text-gray-500 dark:text-gray-400">January 30th, 2023</p>
+        <img
+          src="/placeholder.svg"
+          width="400"
+          height="300"
+          alt="The Joys of Journaling Image"
+          class="object-cover w-full h-60"
+          style="aspect-ratio: 400 / 300; object-fit: cover;"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+<div class="border-t border-gray-200 border-gray-200 bg-gray-50 dark:border-gray-800 dark:border-gray-800 dark:bg-gray-950">
+  <div class="container grid max-w-6xl items-center justify-center gap-8 py-10 px-4 text-center md:py-16 md:px-6 lg:gap-12">
+    <div class="space-y-4">
+      <h2 class="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">About the Blog</h2>
+      <p class="mx-auto max-w-[700px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
+        Welcome to the Blog. This is a place for all your thoughts. Share your ideas with the world.
+      </p>
+    </div>
+  </div>
+</div>
+<div class="bg-gray-50 dark:bg-gray-950">
+  <div class="container grid max-w-6xl items-center justify-center gap-8 py-10 px-4 text-center md:py-16 md:px-6 lg:gap-12">
+    <div class="space-y-4">
+      <h2 class="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Contact Us</h2>
+      <p class="mx-auto max-w-[700px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
+        Ready to get started? Contact us now.
+      </p>
+    </div>
+    <form class="mx-auto max-w-sm space-y-4">
+      <div class="grid grid-cols-1 items-stretch justify-center">
+        <div class="flex flex-col gap-1">
+          <label for="name" class="text-sm font-medium">
+            Name
+          </label>
+          <input
+            class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+            id="name"
+            placeholder="Enter your name"
+          />
+        </div>
+        <div class="flex flex-col gap-1">
+          <label for="email" class="text-sm font-medium">
+            Email
+          </label>
+          <input
+            class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+            id="email"
+            placeholder="Enter your email"
+          />
+        </div>
+        <div class="flex flex-col gap-1">
+          <label for="message" class="text-sm font-medium">
+            Message
+          </label>
+          <textarea
+            class="flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 min-h-[100px] resize-none"
+            id="message"
+            placeholder="Enter your message"
+          ></textarea>
+        </div>
+        <button
+          class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 w-full"
+          type="submit"
+        >
+          Submit
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="bg-gray-50 dark:bg-gray-950">
+  <div class="container px-4 py-6 space-y-2 text-center md:space-y-0 md:flex md:items-center md:justify-between lg:space-y-0">
+    <nav class="flex items-center justify-center space-x-4 text-sm md:space-x-6 lg:space-x-8">
+      <a class="font-medium text-gray-900 dark:text-gray-50 hover:underline" href="#">
+        Terms
+      </a>
+      <a class="font-medium text-gray-900 dark:text-gray-50 hover:underline" href="#">
+        Privacy
+      </a>
+      <a class="font-medium text-gray-900 dark:text-gray-50 hover:underline" href="#">
+        Support
+      </a>
+    </nav>
+    <p class="text-sm text-gray-500 dark:text-gray-400"></p>
+  </div>
+</div> */

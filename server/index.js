@@ -141,7 +141,6 @@ app.post("/login", async (req, res) => {
       return res.status(200).send({
         message: "Logged in!",
         token,
-        user: result[0],
       });
     }
 

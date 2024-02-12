@@ -1,14 +1,18 @@
 import { NavLink } from "react-router-dom";
 // import { useState } from "react";
-import logo from "../pictures/logo/bloggen.png";
 
 const Navigation = () => {
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+  };
+
   return (
     <div>
       <nav className="shadow-md mb-10">
         <div className="nav flex items-center justify-between px-4 py-3">
-          <div className="">
-            <img className="h-16 w-16" src={logo} alt="Logo" />
+          <div className="flex justify-center items-center">
+            <div className="h-6 w-6 rounded-lg bg-gray-900 dark:bg-gray-50" />
+            <span className="font-semibold text-lg text-white">Blog</span>
           </div>
 
           <div className="flex space-x-4">
@@ -124,6 +128,12 @@ const Navigation = () => {
             >
               Sign in
             </NavLink>
+            <button
+              className="bg-blue-700 hover:bg-blue-800 text-white px-4 py-2 text-base font-medium rounded-full"
+              onClick={handleLogout}
+            >
+              Logout
+            </button>
           </div>
         </div>
 
