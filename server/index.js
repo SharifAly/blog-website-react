@@ -11,7 +11,7 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 const corsOptions = {
-  origin: "http://localhost:5000",
+  origin: "http://localhost:3000",
 };
 
 app.use(cors(corsOptions));
@@ -40,7 +40,7 @@ app.get("/", (req, res) => {
 app.post("/register", (req, res) => {
   // get the data from the request body
   try {
-    const { f_name, l_name, email, role, password } = req.body;
+    const { f_name, l_name, email, password } = req.body;
     // hash the incoming password
     const hashedPassword = bcrypt.hashSync(password, 10);
     // sql query to check if email already exists

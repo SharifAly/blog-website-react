@@ -15,7 +15,7 @@ const Navigation = () => {
             <NavLink
               to="/"
               exact
-              className="text-white hover:text-gray-500 px-3 py-2 text-sm font-medium"
+              className="text-white hover:text-gray-500 px-3 py-2 font-medium text-base"
             >
               Home
             </NavLink>
@@ -37,7 +37,7 @@ const Navigation = () => {
             </div>
             <NavLink
               to="/blog"
-              className="text-white hover:text-gray-500 px-3 py-2 text-sm font-medium"
+              className="text-white hover:text-gray-500 px-3 py-2 text-base font-medium"
             >
               Blog
             </NavLink>
@@ -59,7 +59,7 @@ const Navigation = () => {
             </div>
             <NavLink
               to="/blog"
-              className="text-white hover:text-gray-500 px-3 py-2 text-sm font-medium"
+              className="text-white hover:text-gray-500 px-3 py-2 text-base font-medium"
             >
               Post
             </NavLink>
@@ -81,7 +81,7 @@ const Navigation = () => {
             </div>
             <NavLink
               to="/blog"
-              className="text-white hover:text-gray-500 px-3 py-2 text-sm font-medium"
+              className="text-white hover:text-gray-500 px-3 py-2 text-base font-medium"
             >
               About
             </NavLink>
@@ -103,7 +103,7 @@ const Navigation = () => {
             </div>
             <NavLink
               to="/blog"
-              className="text-white hover:text-gray-500 px-3 py-2 text-sm font-medium"
+              className="text-white hover:text-gray-500 px-3 py-2 text-base font-medium"
             >
               Contact
             </NavLink>
@@ -113,14 +113,14 @@ const Navigation = () => {
             <input
               type="text"
               placeholder="Search"
-              className="border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:border-blue-500"
+              className="border border-gray-300 rounded-md px-3 py-2 text-base focus:outline-none focus:border-blue-500"
             />
           </div>
 
           <div>
             <NavLink
               to="/login"
-              className="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 text-sm font-medium rounded-full"
+              className="bg-blue-700 hover:bg-blue-800 text-white px-4 py-2 text-base font-medium rounded-full"
             >
               Sign in
             </NavLink>

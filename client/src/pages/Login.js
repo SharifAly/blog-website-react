@@ -22,7 +22,7 @@ const Login = () => {
                   type="email"
                   name="email"
                   id="email"
-                  placeholder="leroy@jenkins.com"
+                  placeholder="Email"
                   className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100"
                 />
               </div>
@@ -43,7 +43,7 @@ const Login = () => {
                   type="password"
                   name="password"
                   id="password"
-                  placeholder="*****"
+                  placeholder="Password"
                   className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100"
                 />
               </div>
@@ -52,7 +52,7 @@ const Login = () => {
               <div>
                 <button
                   type="button"
-                  className="w-full px-8 py-3 font-semibold rounded-md dark:bg-violet-400 dark:text-gray-900"
+                  className="w-full px-8 py-3 font-semibold rounded-md dark:bg-violet-400 hover:dark:bg-violet-600 dark:text-gray-900"
                 >
                   Sign in
                 </button>
