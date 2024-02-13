@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { Context } from "../App";
 
 const Login = () => {
+  const [isLoggedIn, setIsLoggedIn] = useContext(Context);
+
   const [loginData, setLoginData] = useState({
     email: "",
     password: "",
@@ -18,16 +21,17 @@ const Login = () => {
     axios
       .post("http://localhost:5000/login", loginData)
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setLoginData({
           email: "",
           password: "",
         });
-        navigate("/blog");
+        setIsLoggedIn(true);
+        navigate("/");
         localStorage.setItem("token", res.data.token);
       })
       .catch((err) => {
-        alert(err.response.data);
+        alert(err);
       });
   };
   return (

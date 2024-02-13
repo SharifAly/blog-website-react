@@ -1,3 +1,4 @@
+import { createContext, useState } from "react";
 import Nav from "./components/Navigation";
 import "./index.css";
 import { Route, Routes } from "react-router-dom";
@@ -6,16 +7,27 @@ import Blog from "./pages/Blog";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Footer from "./components/Footer";
+import Contact from "./pages/Contact";
+import About from "./pages/About";
+import Post from "./pages/Post";
+export const Context = createContext();
 const App = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   return (
     <div className="App">
-      <Nav />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/blog" element={<Blog />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-      </Routes>
+      <Context.Provider value={[isLoggedIn, setIsLoggedIn]}>
+        <Nav />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/post" element={<Post />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
+      </Context.Provider>
       <Footer />
     </div>
   );

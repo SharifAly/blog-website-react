@@ -1,9 +1,13 @@
+import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
-// import { useState } from "react";
+import { Context } from "../App";
+import profilePic from "../pictures/logo/bloggen.png";
 
 const Navigation = () => {
+  const [isLoggedIn, setIsLoggedIn] = useContext(Context);
   const handleLogout = () => {
     localStorage.removeItem("token");
+    setIsLoggedIn(false);
   };
 
   return (
@@ -62,7 +66,7 @@ const Navigation = () => {
               </svg>
             </div>
             <NavLink
-              to="/blog"
+              to="/post"
               className="text-white hover:text-gray-500 px-3 py-2 text-base font-medium"
             >
               Post
@@ -84,7 +88,7 @@ const Navigation = () => {
               </svg>
             </div>
             <NavLink
-              to="/blog"
+              to="/about"
               className="text-white hover:text-gray-500 px-3 py-2 text-base font-medium"
             >
               About
@@ -106,7 +110,7 @@ const Navigation = () => {
               </svg>
             </div>
             <NavLink
-              to="/blog"
+              to="/contact"
               className="text-white hover:text-gray-500 px-3 py-2 text-base font-medium"
             >
               Contact
@@ -122,18 +126,28 @@ const Navigation = () => {
           </div>
 
           <div>
-            <NavLink
-              to="/login"
-              className="bg-blue-700 hover:bg-blue-800 text-white px-4 py-2 text-base font-medium rounded-full"
-            >
-              Sign in
-            </NavLink>
-            <button
-              className="bg-blue-700 hover:bg-blue-800 text-white px-4 py-2 text-base font-medium rounded-full"
-              onClick={handleLogout}
-            >
-              Logout
-            </button>
+            {isLoggedIn ? (
+              <div className="flex justify-between items-center">
+                <img
+                  src={profilePic}
+                  alt="profilePicture"
+                  className="w-8 h-8 me-4 rounded-2xl"
+                />
+                <button
+                  className="bg-blue-700 hover:bg-blue-800 text-white px-2 py-1 text-base font-medium rounded-full"
+                  onClick={handleLogout}
+                >
+                  Logout
+                </button>
+              </div>
+            ) : (
+              <NavLink
+                to="/login"
+                className="bg-blue-700 hover:bg-blue-800 text-white px-4 py-2 text-base font-medium rounded-full"
+              >
+                Sign in
+              </NavLink>
+            )}
           </div>
         </div>
 
