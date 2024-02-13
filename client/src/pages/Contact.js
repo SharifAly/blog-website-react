@@ -1,65 +1,126 @@
-import React from "react";
+import React, { useState, useRef } from "react";
+import logo from "../pictures/blog-images/work-4997565_1280.png";
+import emailjs from "@emailjs/browser";
+import { useNavigate } from "react-router-dom";
 
 const Contact = () => {
+  const [emailData, setEmailData] = useState({
+    user_name: "",
+    user_email: "",
+    message: "",
+  });
+
+  const form = useRef();
+
+  const handleInputChange = (e) => {
+    setEmailData({
+      ...emailData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    emailjs
+      .sendForm("service_1zg6p5s", "template_o3bkkuk", form.current, {
+        publicKey: "tTRUGTPu9VXMH1cbC",
+      })
+      .then(
+        () => {
+          console.log("SUCCESS!");
+          setEmailData({
+            user_name: "",
+            user_email: "",
+            message: "",
+          });
+          navigate("/");
+        },
+        (error) => {
+          console.log("FAILED...", error.text);
+        }
+      );
+  };
+
   return (
-    <div>
-      <div className="grid max-w-screen-xl grid-cols-1 gap-8 px-8 py-16 mx-auto rounded-lg md:grid-cols-2 md:px-12 lg:px-16 xl:px-32 dark:bg-gray-800 dark:text-gray-100">
-        <div className="flex flex-col justify-between">
-          <div className="space-y-2">
-            <h2 className="text-4xl font-bold leadi lg:text-5xl">
-              Let's talk!
-            </h2>
-            <div className="dark:text-gray-400">
-              Vivamus in nisl metus? Phasellus.
+    <>
+      <div className="flex items-center justify-center h-screen">
+        {/* <img src={logo} alt="" className="w-40" /> */}
+        <div className="flex flex-row gap-32 justify-center w-3/4 p-6 rounded-md sm:p-10 dark:bg-gray-900 dark:text-gray-100">
+          <div className="mb-8 text-center">
+            <h1 className="my-3 text-4xl font-bold">Let's talk</h1>
+            <p className="opacity-55">
+              If you have a problem send us a message
+            </p>
+            <img src={logo} alt="" className="w-96 rounded-xl opacity-75" />
+          </div>
+          <form ref={form} onSubmit={handleSubmit} className="space-y-12">
+            <div className="space-y-4">
+              <div>
+                <label for="user_name" className="block mb-2 text-sm">
+                  Name
+                </label>
+                <input
+                  type="text"
+                  name="user_name"
+                  id="user_name"
+                  placeholder="John Doe"
+                  className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100"
+                  onChange={handleInputChange}
+                  // onChange={handleInputChange}
+                  value={emailData.user_name}
+                />
+              </div>
+              <div>
+                <div className="flex justify-between mb-2">
+                  <label for="user_email" className="text-sm">
+                    Email
+                  </label>
+                </div>
+                <input
+                  type="email"
+                  name="user_email"
+                  id="user_email"
+                  placeholder="john.doe@example.com"
+                  className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100"
+                  onChange={handleInputChange}
+                  // onChange={}
+                  value={emailData.user_email}
+                />
+              </div>
+              <div>
+                <div className="flex justify-between mb-2">
+                  <label for="message" className="text-sm">
+                    Your Message
+                  </label>
+                </div>
+                <textarea
+                  type="text"
+                  name="message"
+                  id="message"
+                  placeholder="Your message"
+                  className="w-full h-40 px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100"
+                  onChange={handleInputChange}
+                  // onChange={}
+                  value={emailData.message}
+                />
+              </div>
             </div>
-          </div>
-          <img
-            src="assets/svg/doodle.svg"
-            alt=""
-            className="p-6 h-52 md:h-64"
-          />
+            <div className="space-y-2">
+              <div>
+                <input
+                  type="submit"
+                  value="Send"
+                  className="w-full px-8 py-3 font-semibold rounded-md dark:bg-violet-400 hover:dark:bg-violet-600 dark:text-gray-900"
+                />
+              </div>
+            </div>
+          </form>
         </div>
-        <form novalidate="" className="space-y-6">
-          <div>
-            <label for="name" className="text-sm">
-              Full name
-            </label>
-            <input
-              id="name"
-              type="text"
-              placeholder=""
-              className="w-full p-3 rounded dark:bg-gray-800"
-            />
-          </div>
-          <div>
-            <label for="email" className="text-sm">
-              Email
-            </label>
-            <input
-              id="email"
-              type="email"
-              className="w-full p-3 rounded dark:bg-gray-800"
-            />
-          </div>
-          <div>
-            <label for="message" className="text-sm">
-              Message
-            </label>
-            <textarea
-              id="message"
-              rows="3"
-              className="w-full p-3 rounded dark:bg-gray-800"
-            ></textarea>
-          </div>
-          <button
-            type="submit"
-            className="w-full p-3 text-sm font-bold tracki uppercase rounded dark:bg-violet-400 dark:text-gray-900"
-          >
-            Send Message
-          </button>
-        </form>
       </div>
-    </div>
+    </>
   );
 };
 

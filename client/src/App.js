@@ -8,7 +8,6 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Footer from "./components/Footer";
 import Contact from "./pages/Contact";
-import About from "./pages/About";
 import Post from "./pages/Post";
 export const Context = createContext();
 const App = () => {
@@ -23,7 +22,6 @@ const App = () => {
           <Route path="/blog" element={<Blog />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/about" element={<About />} />
           <Route path="/post" element={<Post />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>

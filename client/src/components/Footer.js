@@ -1,112 +1,17 @@
 import React from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
+// import { PiCopyrightLight } from "react-icons/pi";
 
 const Footer = () => {
   return (
     <footer className=" dark:text-gray-50">
       <div className="container flex justify-between p-4 mx-auto md:p-8 lg:flex-row dark:divide-gray-400">
-        <div className="nav flex items-center justify-between px-4 py-3">
-          <div className="">
-            {/* <img className="h-16 w-16" src={logo} alt="Logo" /> */}
-          </div>
-
-          <div className="flex space-x-4">
-            <NavLink
-              to="/"
-              exact
-              className="text-white hover:text-gray-500 px-3 py-2 text-sm font-medium"
-            >
-              Home
-            </NavLink>
-            <div className="text-gray-300 flex items-center">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                stroke="currentColor"
-                class="w-4 h-4 current-fill"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"
-                />
-              </svg>
-            </div>
-            <NavLink
-              to="/blog"
-              className="text-white hover:text-gray-500 px-3 py-2 text-sm font-medium"
-            >
-              Blog
-            </NavLink>
-            <div className="text-gray-300 flex items-center">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                stroke="currentColor"
-                class="w-4 h-4 current-fill"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"
-                />
-              </svg>
-            </div>
-            <NavLink
-              to="/blog"
-              className="text-white hover:text-gray-500 px-3 py-2 text-sm font-medium"
-            >
-              Post
-            </NavLink>
-            <div className="text-gray-300 flex items-center">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                stroke="currentColor"
-                class="w-4 h-4 current-fill"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"
-                />
-              </svg>
-            </div>
-            <NavLink
-              to="/blog"
-              className="text-white hover:text-gray-500 px-3 py-2 text-sm font-medium"
-            >
-              About
-            </NavLink>
-            <div className="text-gray-300 flex items-center">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                stroke="currentColor"
-                class="w-4 h-4 current-fill"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"
-                />
-              </svg>
-            </div>
-            <NavLink
-              to="/blog"
-              className="text-white hover:text-gray-500 px-3 py-2 text-sm font-medium"
-            >
-              Contact
-            </NavLink>
-          </div>
+        <div className="copyright-container flex justify-center items-center">
+          <p className="flex gap-2 justify-center items-center">
+            <span className="dark:text-gray-400">
+              © Copyright Sharif Aly 2024
+            </span>
+          </p>
         </div>
 
         <div className="flex flex-col justify-center pt-6 lg:pt-0">
@@ -115,7 +20,7 @@ const Footer = () => {
               rel="noopener noreferrer"
               href="#"
               title="Instagram"
-              className="flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 dark:bg-violet-400 dark:text-gray-900"
+              className="flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 dark:bg-violet-400 hover:dark:bg-violet-700 dark:text-gray-900"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -130,7 +35,7 @@ const Footer = () => {
               rel="noopener noreferrer"
               href="#"
               title="Pinterest"
-              className="flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 dark:bg-violet-400 dark:text-gray-900"
+              className="flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 dark:bg-violet-400 hover:dark:bg-violet-700 dark:text-gray-900"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -145,7 +50,7 @@ const Footer = () => {
               rel="noopener noreferrer"
               href="#"
               title="Twitter"
-              className="flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 dark:bg-violet-400 dark:text-gray-900"
+              className="flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 dark:bg-violet-400 hover:dark:bg-violet-700 dark:text-gray-900"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -160,7 +65,7 @@ const Footer = () => {
               rel="noopener noreferrer"
               href="#"
               title="Facebook"
-              className="flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 dark:bg-violet-400 dark:text-gray-900"
+              className="flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 dark:bg-violet-400 hover:dark:bg-violet-700 dark:text-gray-900"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -175,7 +80,7 @@ const Footer = () => {
               rel="noopener noreferrer"
               href="#"
               title="Gmail"
-              className="flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 dark:bg-violet-400 dark:text-gray-900"
+              className="flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 dark:bg-violet-400 hover:dark:bg-violet-700 dark:text-gray-900"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
