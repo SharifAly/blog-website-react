@@ -20,7 +20,7 @@ const Footer = () => {
               rel="noopener noreferrer"
               href="#"
               title="Instagram"
-              className="flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 dark:bg-violet-400 hover:dark:bg-violet-700 dark:text-gray-900"
+              className="flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 dark:bg-violet-400 hover:dark:bg-violet-600 dark:text-gray-900"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -35,7 +35,7 @@ const Footer = () => {
               rel="noopener noreferrer"
               href="#"
               title="Pinterest"
-              className="flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 dark:bg-violet-400 hover:dark:bg-violet-700 dark:text-gray-900"
+              className="flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 dark:bg-violet-400 hover:dark:bg-violet-600 dark:text-gray-900"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -50,7 +50,7 @@ const Footer = () => {
               rel="noopener noreferrer"
               href="#"
               title="Twitter"
-              className="flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 dark:bg-violet-400 hover:dark:bg-violet-700 dark:text-gray-900"
+              className="flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 dark:bg-violet-400 hover:dark:bg-violet-600 dark:text-gray-900"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -65,7 +65,7 @@ const Footer = () => {
               rel="noopener noreferrer"
               href="#"
               title="Facebook"
-              className="flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 dark:bg-violet-400 hover:dark:bg-violet-700 dark:text-gray-900"
+              className="flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 dark:bg-violet-400 hover:dark:bg-violet-600 dark:text-gray-900"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -80,7 +80,7 @@ const Footer = () => {
               rel="noopener noreferrer"
               href="#"
               title="Gmail"
-              className="flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 dark:bg-violet-400 hover:dark:bg-violet-700 dark:text-gray-900"
+              className="flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 dark:bg-violet-400 hover:dark:bg-violet-600 dark:text-gray-900"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"

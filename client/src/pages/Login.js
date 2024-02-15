@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../App";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
   const [isLoggedIn, setIsLoggedIn] = useContext(Context);
@@ -29,13 +31,15 @@ const Login = () => {
         setIsLoggedIn(true);
         navigate("/");
         localStorage.setItem("token", res.data.token);
+        toast("Login successful!");
       })
       .catch((err) => {
-        alert(err);
+        toast("Wrong email or password!");
       });
   };
   return (
     <>
+      <ToastContainer />
       <div className="flex items-center justify-center h-screen">
         <div className="flex flex-col max-w-md p-6 rounded-md sm:p-10 dark:bg-gray-900 dark:text-gray-100">
           <div className="mb-8 text-center">

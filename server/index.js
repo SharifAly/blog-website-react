@@ -166,6 +166,21 @@ app.post("/login", async (req, res) => {
 //   res.send(decoded);
 // });
 
+// blog data section
+
+// get all posts
+
+app.get("/blog", (req, res) => {
+  const sql = "SELECT * FROM blog.posts";
+  db.query(sql, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
+});
+
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });

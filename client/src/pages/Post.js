@@ -11,7 +11,7 @@ const Post = () => {
       <>
         <div className="flex items-center justify-center h-screen">
           {/* <img src={logo} alt="" className="w-40" /> */}
-          <div className="flex flex-row gap-32 justify-center w-3/4 p-6 rounded-md sm:p-10 dark:bg-gray-900 dark:text-gray-100">
+          <div className="flex flex-row gap-32 justify-center w-3/4 p-6 rounded-xl sm:p-10 dark:bg-gray-900 dark:text-gray-100">
             <div className="mb-8 text-center">
               <h1 className="my-3 text-4xl font-bold">Post a new Story</h1>
               <img src={logo} alt="" className="w-96 rounded-xl opacity-80" />
@@ -19,14 +19,14 @@ const Post = () => {
             <form onSubmit={handleSubmit} className="space-y-12">
               <div className="space-y-4">
                 <div>
-                  <label for="email" className="block mb-2 text-sm">
-                    Name
+                  <label for="title" className="block mb-2 text-sm">
+                    Title
                   </label>
                   <input
                     type="text"
-                    name="name"
-                    id="name"
-                    placeholder="John Doe"
+                    name="title"
+                    id="title"
+                    placeholder="News from the world"
                     className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100"
                     // onChange={handleInputChange}
                     // value={loginData.email}
@@ -34,30 +34,14 @@ const Post = () => {
                 </div>
                 <div>
                   <div className="flex justify-between mb-2">
-                    <label for="email" className="text-sm">
-                      Email
-                    </label>
-                  </div>
-                  <input
-                    type="email"
-                    name="email"
-                    id="email"
-                    placeholder="john.doe@example.com"
-                    className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100"
-                    // onChange={}
-                    // value={}
-                  />
-                </div>
-                <div>
-                  <div className="flex justify-between mb-2">
-                    <label for="message" className="text-sm">
-                      Your Message
+                    <label for="post" className="text-sm">
+                      Your Post
                     </label>
                   </div>
                   <textarea
                     type="text"
-                    name="message"
-                    id="message"
+                    name="post"
+                    id="post"
                     placeholder=""
                     className="w-full h-40 px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100"
                     // onChange={}
@@ -71,7 +55,7 @@ const Post = () => {
                     type="submit"
                     className="w-full px-8 py-3 font-semibold rounded-md dark:bg-violet-400 hover:dark:bg-violet-600 dark:text-gray-900"
                   >
-                    Send Message
+                    Publish Post
                   </button>
                 </div>
               </div>

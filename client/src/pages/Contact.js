@@ -48,7 +48,7 @@ const Contact = () => {
     <>
       <div className="flex items-center justify-center h-screen">
         {/* <img src={logo} alt="" className="w-40" /> */}
-        <div className="flex flex-row gap-32 justify-center w-3/4 p-6 rounded-md sm:p-10 dark:bg-gray-900 dark:text-gray-100">
+        <div className="flex flex-row gap-32 justify-center w-3/4 p-6 rounded-xl sm:p-10 dark:bg-gray-900 dark:text-gray-100">
           <div className="mb-8 text-center">
             <h1 className="my-3 text-4xl font-bold">Let's talk</h1>
             <p className="opacity-55">
