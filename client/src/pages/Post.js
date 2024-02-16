@@ -1,9 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
 import logo from "../pictures/blog-images/computer-4484282_1280.jpg";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const Post = () => {
+  const [postData, setPostData] = useState({
+    title: "",
+    category: "",
+    body: "",
+    image: null,
+  });
+
   const handleSubmit = () => {
-    alert("Post uploaded successfully!");
+    axios
+      .post("http://localhost:5000/post", postData, {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      })
+      .then(() => {
+        toast("Posted Successfully");
+      })
+      .catch((err) => {
+        toast("Error in Posting");
+      });
+  };
+
+  const handleInputChange = (e) => {
+    setPostData({
+      ...postData,
+      [e.target.name]: e.target.value,
+    });
+    console.log(postData);
   };
   return (
     <div className="text-white">
@@ -28,9 +56,21 @@ const Post = () => {
                     id="title"
                     placeholder="News from the world"
                     className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100"
-                    // onChange={handleInputChange}
-                    // value={loginData.email}
+                    onChange={handleInputChange}
                   />
+                  <select
+                    id="pet-select"
+                    className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 mt-7 cursor-pointer opacity-60"
+                    onChange={(e) =>
+                      setPostData({ ...postData, category: e.target.value })
+                    }
+                    defaultValue={postData.category}
+                    name="category"
+                  >
+                    <option value="">Choose a category</option>
+                    <option value="tech">Tech</option>
+                    <option value="beauty">Beauty</option>
+                  </select>
                 </div>
                 <div>
                   <div className="flex justify-between mb-2">
@@ -40,10 +80,12 @@ const Post = () => {
                   </div>
                   <textarea
                     type="text"
-                    name="post"
+                    name="body"
                     id="post"
                     placeholder=""
                     className="w-full h-40 px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100"
+                    onChange={handleInputChange}
+
                     // onChange={}
                     // value={}
                   />

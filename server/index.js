@@ -181,6 +181,34 @@ app.get("/blog", (req, res) => {
   });
 });
 
+// insert a new post to database
+
+app.post("/post", (req, res) => {
+  const { title, category, image, body } = req.body;
+  const sql =
+    "INSERT INTO blog.posts (title, category, image, body, fk_user_id) VALUES (?,?,?,?,?)";
+  const token = req.headers.authorization;
+  const decode = jwtDecode(token);
+  const userId = decode.userId;
+  db.query(sql, [title, category, image, body, userId], (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
+  console.log(req.body);
+});
+
+// const decode = () => {
+//   const token = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRW1haWwiOiJzaGFyaWYuYWx5X0BvdXRsb29rLmNvbSIsInVzZXJJZCI6MjksImlhdCI6MTcwODA5NDI2MiwiZXhwIjoxNzA4MDk3ODYyfQ.aeBQH5KnUqRQdcdD6IkSFd6N76M3A0MI5FwWtOYBH4U`;
+//   const decoded = jwtDecode(token);
+//   const userId = decoded.userId;
+//   console.log(userId);
+// };
+
+// decode();
+
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });

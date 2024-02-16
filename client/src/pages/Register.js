@@ -55,7 +55,7 @@ const Register = () => {
     axios
       .post("http://localhost:5000/register", regData)
       .then(() => {
-        console.log("Registration successful");
+        toast("Registration successful");
         // set the input fields to empty after registration
         setRegData({
           f_name: "",
