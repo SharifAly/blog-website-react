@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 const Blog = () => {
-  const [filter, setFilter] = useState("All");
+  // const [filter, setFilter] = useState("All");
 
   const [blogData, setBlogData] = useState({
     title: "",
@@ -146,7 +146,7 @@ const Blog = () => {
                         })}
                       </span>
                       <button className="hover:underline dark:text-violet-400">
-                        read more
+                        <Link to={`/details/${post.id}`}>read more</Link>
                       </button>
                     </div>
                   </div>

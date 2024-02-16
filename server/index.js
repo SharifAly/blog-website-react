@@ -192,12 +192,11 @@ app.post("/post", (req, res) => {
   const userId = decode.userId;
   db.query(sql, [title, category, image, body, userId], (err, result) => {
     if (err) {
-      console.log(err);
+      res.status(500).send(err.message);
     } else {
       res.send(result);
     }
   });
-  console.log(req.body);
 });
 
 // const decode = () => {
@@ -208,6 +207,20 @@ app.post("/post", (req, res) => {
 // };
 
 // decode();
+
+// get specific post
+
+app.get("/details/:id", (req, res) => {
+  const params = req.params.id;
+  const sql = "SELECT * FROM blog.posts WHERE id = ?";
+  db.query(sql, params, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
+});
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

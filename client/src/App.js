@@ -9,6 +9,7 @@ import Register from "./pages/Register";
 import Footer from "./components/Footer";
 import Contact from "./pages/Contact";
 import Post from "./pages/Post";
+import Details from "./pages/Details";
 export const Context = createContext();
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -23,6 +24,7 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/post" element={<Post />} />
+          <Route path="/details/:id" element={<Details />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>
       </Context.Provider>
