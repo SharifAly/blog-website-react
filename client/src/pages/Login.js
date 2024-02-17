@@ -1,37 +1,42 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { Context } from "../App";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
-  const [isLoggedIn, setIsLoggedIn] = useContext(Context);
-
   const [loginData, setLoginData] = useState({
     email: "",
     password: "",
   });
 
+  useEffect(() => {
+    if (localStorage.getItem("setCurrentTime" - currentTime > 1)) {
+      localStorage.clear();
+    }
+  }, []);
+
   const handleInputChange = (e) => {
     setLoginData({ ...loginData, [e.target.name]: e.target.value });
   };
+  const currentTime = new Date().getTime();
   const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
       .post("http://localhost:5000/login", loginData)
       .then((res) => {
-        // console.log(res.data);
         setLoginData({
           email: "",
           password: "",
         });
-        setIsLoggedIn(true);
         navigate("/");
         localStorage.setItem("token", res.data.token);
+        localStorage.setItem("loggedIn", true);
+        localStorage.setItem("setCurrentTime", currentTime);
         toast("Login successful!");
+        window.location.reload(false);
       })
       .catch((err) => {
         toast("Wrong email or password!");

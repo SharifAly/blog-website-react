@@ -1,14 +1,21 @@
-import React, { useContext } from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import { Context } from "../App";
 import profilePic from "../pictures/logo/bloggen.png";
 
 const Navigation = () => {
-  const [isLoggedIn, setIsLoggedIn] = useContext(Context);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const handleLogout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("loggedIn");
+    localStorage.removeItem("setCurrentTime");
     setIsLoggedIn(false);
   };
+
+  useEffect(() => {
+    if (localStorage.getItem("loggedIn")) {
+      setIsLoggedIn(true);
+    }
+  }, []);
 
   return (
     <div className="nav-container mt-4">

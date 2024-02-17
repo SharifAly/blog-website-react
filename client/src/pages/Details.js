@@ -2,10 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 
-// get specific post with useEffect, params and all is working
-// to fix: just render the details after safing in the postData state
-
 const Details = () => {
+  // const [isLoaded, setIsLoaded] = useState(false)
   const [postData, setPostData] = useState({
     title: "",
     category: "",
@@ -20,41 +18,50 @@ const Details = () => {
     axios
       .get(`http://localhost:5000/details/${id}`)
       .then((res) => {
-        setPostData(res);
+        setPostData(res.data);
         console.log(postData);
       })
       .catch((err) => {
         console.log(err);
       });
   }, [id]);
+
   return (
     <div>
       {postData.length > 0 &&
         postData.map((post) => (
-          <div key={post.id} class="max-w-sm rounded overflow-hidden shadow-lg">
-            <img
-              class="w-full"
-              src="/img/card-top.jpg"
-              alt="Sunset in the mountains"
-            />
-            <div class="px-6 py-4">
-              <div class="font-bold text-xl mb-2">The Coldest Sunset</div>
-              <p class="text-gray-700 text-base">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Voluptatibus quia, nulla! Maiores et perferendis eaque,
-                exercitationem praesentium nihil.
-              </p>
-            </div>
-            <div class="px-6 pt-4 pb-2">
-              <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-                #photography
-              </span>
-              <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-                #travel
-              </span>
-              <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-                #winter
-              </span>
+          <div className="2xl:container 2xl:mx-auto lg:py-16 lg:px-20 md:py-12 md:px-6 py-9 px-4">
+            <div className="flex flex-col lg:flex-row justify-between gap-8">
+              <div className="w-full lg:w-5/12 flex flex-col justify-between">
+                <h2
+                  rel="noopener noreferrer"
+                  href="#"
+                  className="text-xs tracki uppercase dark:text-blue-700"
+                >
+                  {post.category}
+                </h2>
+                <h1 className="text-3xl lg:text-4xl font-bold leading-9 text-gray-300 pb-4">
+                  {post.title}
+                </h1>
+                <p className="font-normal text-base leading-6 text-gray-600 ">
+                  {post.body}
+                </p>
+                <span className="text-white">
+                  {" "}
+                  {new Date(post.created_at).toLocaleDateString("en-US", {
+                    day: "numeric",
+                    month: "long",
+                    year: "numeric",
+                  })}
+                </span>
+              </div>
+              <div className="w-full lg:w-8/12 ">
+                <img
+                  className="w-full h-full"
+                  src="https://i.ibb.co/FhgPJt8/Rectangle-116.png"
+                  alt={post.title}
+                />
+              </div>
             </div>
           </div>
         ))}
