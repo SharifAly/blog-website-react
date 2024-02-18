@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import profilePic from "../pictures/logo/bloggen.png";
+// import axios from "axios";
 
 const Navigation = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // const [userData, setUserData] = useState("");
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("loggedIn");
-    localStorage.removeItem("setCurrentTime");
+    localStorage.clear();
     setIsLoggedIn(false);
   };
 
@@ -93,13 +92,18 @@ const Navigation = () => {
           <div>
             {isLoggedIn ? (
               <div className="flex justify-between items-center">
-                <img
-                  src={profilePic}
-                  alt="profilePicture"
-                  className="w-8 h-8 me-4 rounded-2xl"
-                />
+                <NavLink to={`/profile/${localStorage.getItem("userId")}`}>
+                  <div className="relative flex-shrink-0">
+                    <img
+                      src="https://source.unsplash.com/50x50/?portrait"
+                      alt=""
+                      className="w-10 h-10 border rounded-full dark:bg-gray-500 dark:border-gray-700"
+                    />
+                  </div>
+                </NavLink>
+
                 <button
-                  className="bg-blue-700 hover:bg-blue-800 text-white px-2 py-1 text-base font-medium rounded-full"
+                  className="bg-blue-700 hover:bg-blue-800 text-white px-3 py-2 text-base font-medium rounded-full ms-3"
                   onClick={handleLogout}
                 >
                   Logout

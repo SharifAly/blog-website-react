@@ -141,6 +141,7 @@ app.post("/login", async (req, res) => {
       return res.status(200).send({
         message: "Logged in!",
         token,
+        userId: result[0].id,
       });
     }
 
@@ -213,6 +214,33 @@ app.post("/post", (req, res) => {
 app.get("/details/:id", (req, res) => {
   const params = req.params.id;
   const sql = "SELECT * FROM blog.posts WHERE id = ?";
+  db.query(sql, params, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
+});
+
+// get user id from all users
+
+app.get("/profile/id", (req, res) => {
+  const sql = "SELECT id FROM blog.users";
+  db.query(sql, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
+});
+
+// get user profile
+
+app.get("/profile/:id", (req, res) => {
+  const params = req.params.id;
+  const sql = "SELECT * FROM blog.users WHERE id = ?";
   db.query(sql, params, (err, result) => {
     if (err) {
       console.log(err);

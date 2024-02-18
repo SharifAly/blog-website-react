@@ -9,6 +9,7 @@ import Footer from "./components/Footer";
 import Contact from "./pages/Contact";
 import Post from "./pages/Post";
 import Details from "./pages/Details";
+import Profile from "./pages/Profile";
 const App = () => {
   return (
     <div className="App">
@@ -20,6 +21,7 @@ const App = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/post" element={<Post />} />
         <Route path="/details/:id" element={<Details />} />
+        <Route path="/profile/:id" element={<Profile />} />
         <Route path="/contact" element={<Contact />} />
       </Routes>
       <Footer />

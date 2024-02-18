@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -11,16 +11,11 @@ const Login = () => {
     password: "",
   });
 
-  useEffect(() => {
-    if (localStorage.getItem("setCurrentTime" - currentTime > 1)) {
-      localStorage.clear();
-    }
-  }, []);
+  const currentTime = new Date().getTime();
 
   const handleInputChange = (e) => {
     setLoginData({ ...loginData, [e.target.name]: e.target.value });
   };
-  const currentTime = new Date().getTime();
   const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -34,8 +29,8 @@ const Login = () => {
         navigate("/");
         localStorage.setItem("token", res.data.token);
         localStorage.setItem("loggedIn", true);
+        localStorage.setItem("userId", res.data.userId);
         localStorage.setItem("setCurrentTime", currentTime);
-        toast("Login successful!");
         window.location.reload(false);
       })
       .catch((err) => {

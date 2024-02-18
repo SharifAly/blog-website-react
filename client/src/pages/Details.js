@@ -24,7 +24,7 @@ const Details = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, [id]);
+  }, [id, postData]);
 
   return (
     <div>
@@ -32,21 +32,21 @@ const Details = () => {
         postData.map((post) => (
           <div className="2xl:container 2xl:mx-auto lg:py-16 lg:px-20 md:py-12 md:px-6 py-9 px-4">
             <div className="flex flex-col lg:flex-row justify-between gap-8">
-              <div className="w-full lg:w-5/12 flex flex-col justify-between">
-                <h2
+              <div className="w-full lg:w-5/12 flex flex-col justify-evenly">
+                <h1
                   rel="noopener noreferrer"
                   href="#"
-                  className="text-xs tracki uppercase dark:text-blue-700"
+                  className="text-xl mb-5 tracki uppercase dark:text-blue-700"
                 >
                   {post.category}
-                </h2>
-                <h1 className="text-3xl lg:text-4xl font-bold leading-9 text-gray-300 pb-4">
+                </h1>
+                <h1 className="text-3xl lg:text-4xl uppercase font-bold leading-9 text-gray-300 pb-4">
                   {post.title}
                 </h1>
-                <p className="font-normal text-base leading-6 text-gray-600 ">
+                <p className="font-normal text-base leading-6 text-gray-500 ">
                   {post.body}
                 </p>
-                <span className="text-white">
+                <span className="text-white mt-10">
                   {" "}
                   {new Date(post.created_at).toLocaleDateString("en-US", {
                     day: "numeric",
@@ -57,7 +57,7 @@ const Details = () => {
               </div>
               <div className="w-full lg:w-8/12 ">
                 <img
-                  className="w-full h-full"
+                  className="w-full object-cover"
                   src="https://i.ibb.co/FhgPJt8/Rectangle-116.png"
                   alt={post.title}
                 />

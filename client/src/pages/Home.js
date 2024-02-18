@@ -1,6 +1,22 @@
 // import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
 const Home = () => {
+  const currentTime = new Date().getTime();
+  const loginTime = localStorage.getItem("setCurrentTime");
+
+  const diffMs = currentTime - loginTime;
+
+  const diffHours = Math.abs(diffMs / 1000 / 60 / 60);
+  const diffHoursRound = Math.round(diffHours);
+
+  useEffect(() => {
+    // to fix: create date to subtract it with current date, if its more than 5 hours localstorage clear
+    // to change: write the autologout function in home.js
+    if (diffHoursRound > 12) {
+      localStorage.clear();
+    }
+  }, [diffHoursRound, diffHours]);
   return (
     <>
       {/* <div className="shadow-xl rounded-lg bg-white dark:bg-gray-900">
