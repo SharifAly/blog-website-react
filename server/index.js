@@ -172,7 +172,20 @@ app.post("/login", async (req, res) => {
 // get all posts
 
 app.get("/blog", (req, res) => {
-  const sql = "SELECT * FROM blog.posts";
+  const sql = "SELECT * FROM blog.posts ORDER BY created_at DESC";
+  db.query(sql, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
+});
+
+// get four latest posts
+
+app.get("/latest", (req, res) => {
+  const sql = "SELECT * FROM blog.posts ORDER BY created_at DESC LIMIT 4";
   db.query(sql, (err, result) => {
     if (err) {
       console.log(err);

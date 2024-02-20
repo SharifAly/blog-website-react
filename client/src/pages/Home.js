@@ -1,7 +1,29 @@
-// import { Link } from "react-router-dom";
-import { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useState, useEffect, useRef } from "react";
+import emailjs from "@emailjs/browser";
+import logo from "../pictures/blog-images/work-4997565_1280.png";
+import axios from "axios";
+
+// sql query for the last four posts
 
 const Home = () => {
+  const [latestPosts, setLatestPosts] = useState({
+    title: "",
+    category: "",
+    image: null,
+    author: "",
+  });
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/latest")
+      .then((res) => {
+        setLatestPosts(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
   const currentTime = new Date().getTime();
   const loginTime = localStorage.getItem("setCurrentTime");
 
@@ -11,247 +33,190 @@ const Home = () => {
   const diffHoursRound = Math.round(diffHours);
 
   useEffect(() => {
-    // to fix: create date to subtract it with current date, if its more than 5 hours localstorage clear
-    // to change: write the autologout function in home.js
     if (diffHoursRound > 12) {
       localStorage.clear();
     }
   }, [diffHoursRound, diffHours]);
+
+  const [emailData, setEmailData] = useState({
+    user_name: "",
+    user_email: "",
+    message: "",
+  });
+
+  const form = useRef();
+
+  const handleInputChange = (e) => {
+    setEmailData({
+      ...emailData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    emailjs
+      .sendForm("service_1zg6p5s", "template_o3bkkuk", form.current, {
+        publicKey: "tTRUGTPu9VXMH1cbC",
+      })
+      .then(
+        () => {
+          console.log("SUCCESS!");
+          setEmailData({
+            user_name: "",
+            user_email: "",
+            message: "",
+          });
+          navigate("/");
+        },
+        (error) => {
+          console.log("FAILED...", error.text);
+        }
+      );
+  };
   return (
     <>
-      {/* <div className="shadow-xl rounded-lg bg-white dark:bg-gray-900">
-        <div className="container px-4 py-6 space-y-2 text-center md:space-y-0 md:flex md:items-center md:justify-between lg:space-y-0">
-          <div className="flex items-center space-2">
-            <Link className="flex items-center space-2" href="#">
-              <div className="h-6 w-6 rounded-lg bg-gray-900 dark:bg-gray-50" />
-              <span className="font-semibold text-lg text-white">Blog</span>
-            </Link>
-          </div>
-          <nav className="flex items-center justify-center space-x-4 text-sm md:space-x-6 lg:space-x-8">
-            <Link
-              className="font-medium text-gray-900 dark:text-gray-50 hover:underline"
-              href="#"
-            >
-              Home
-            </Link>
-            <Link
-              className="font-medium text-gray-900 dark:text-gray-50 hover:underline"
-              href="#"
-            >
-              Posts
-            </Link>
-            <Link
-              className="font-medium text-gray-900 dark:text-gray-50 hover:underline"
-              href="#"
-            >
-              About
-            </Link>
-            <Link
-              className="font-medium text-gray-900 dark:text-gray-50 hover:underline"
-              href="#"
-            >
-              Contact
-            </Link>
-          </nav>
-          <div className="flex items-center space-x-4">
-            <Link
-              className="font-medium text-gray-900 dark:text-gray-50 hover:underline"
-              href="#"
-            >
-              Sign in
-            </Link>
-          </div>
-        </div>
-      </div>
-      <div className="container grid max-w-6xl items-center justify-center gap-4 px-4 text-center md:gap-8 md:px-6 lg:gap-12">
-        <div className="space-y-4 lg:space-y-5 xl:space-y-6">
-          <div className="space-y-2">
-            <Link
-              className="text-3xl font-bold tracking-tighter sm:text-5xl md:text-6xl"
-              href="#"
-            >
-              Welcome to the Blog
-            </Link>
-            <p className="mx-auto max-w-[800px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
-              A place for all your thoughts. Share your ideas with the world.
-            </p>
-          </div>
-        </div>
-      </div>
-      <div className="container grid max-w-6xl items-center justify-center gap-8 py-10 px-4 text-center md:py-16 md:px-6 lg:gap-12">
-        <div className="space-y-4">
-          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
-            Latest Posts
-          </h2>
-        </div>
-        <div className="divide-y rounded-lg border">
-          <div className="grid grid-cols-1 items-stretch justify-center divide-y md:grid-cols-2">
-            <div className="flex flex-col gap-1 p-4">
-              <Link className="font-semibold" href="#">
-                The First Post on the Blog
-              </Link>
-              <p className="text-sm text-gray-500 dark:text-gray-400">
-                February 1st, 2023
-              </p>
-              <img
-                alt="First"
-                className="object-cover w-full h-60"
-                height={300}
-                src="/placeholder.svg"
-                style={{
-                  aspectRatio: "400/300",
-                  objectFit: "cover",
-                }}
-                width={400}
-              />
+      <div className="flex justify-center flex-col">
+        <div className="container grid items-center justify-center gap-4 px-4 text-center md:gap-8 md:px-6 lg:gap-12">
+          <div className="space-y-4 lg:space-y-5 xl:space-y-6">
+            <div className="space-y-4">
+              <h2 className="text-3xl text-white font-bold tracking-tighter sm:text-4xl md:text-5xl">
+                Latest Posts
+              </h2>
             </div>
-            <div className="flex flex-col gap-1 p-4">
-              <Link className="font-semibold" href="#">
-                Introducing the Blog
-              </Link>
-              <p className="text-sm text-gray-500 dark:text-gray-400">
-                January 23rd, 2023
+            <div className="space-y-2">
+              <p className="text-white mx-auto max-w-[800px] md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                A place for all your thoughts. Share your news with the world.
               </p>
-              <img
-                alt="Introducing"
-                className="object-cover w-full h-60"
-                height={300}
-                src="/placeholder.svg"
-                style={{
-                  aspectRatio: "400/300",
-                  objectFit: "cover",
-                }}
-                width={400}
-              />
-            </div>
-          </div>
-          <div className="grid grid-cols-1 items-stretch justify-center divide-y md:grid-cols-2">
-            <div className="flex flex-col gap-1 p-4">
-              <Link className="font-semibold" href="#">
-                How to Start Writing
-              </Link>
-              <p className="text-sm text-gray-500 dark:text-gray-400">
-                February 10th, 2023
-              </p>
-              <img
-                alt="How"
-                className="object-cover w-full h-60"
-                height={300}
-                src="/placeholder.svg"
-                style={{
-                  aspectRatio: "400/300",
-                  objectFit: "cover",
-                }}
-                width={400}
-              />
-            </div>
-            <div className="flex flex-col gap-1 p-4">
-              <Link className="font-semibold" href="#">
-                The Joys of Journaling
-              </Link>
-              <p className="text-sm text-gray-500 dark:text-gray-400">
-                January 30th, 2023
-              </p>
-              <img
-                alt="The"
-                className="object-cover w-full h-60"
-                height={300}
-                src="/placeholder.svg"
-                style={{
-                  aspectRatio: "400/300",
-                  objectFit: "cover",
-                }}
-                width={400}
-              />
             </div>
           </div>
         </div>
-      </div>
-      <div className="border-t border-gray-200 bg-gray-50 dark:border-gray-800 dark:bg-gray-950">
-        <div className="container grid max-w-6xl items-center justify-center gap-8 py-10 px-4 text-center md:py-16 md:px-6 lg:gap-12">
-          <div className="space-y-4">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
-              About the Blog
-            </h2>
-            <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
-              Welcome to the Blog. This is a place for all your thoughts. Share
-              your ideas with the world.
-            </p>
+        <div className="container grid items-center justify-center gap-8 py-10 px-4 text-center md:py-16 md:px-6 lg:gap-12">
+          <div className="rounded-lg dark:bg-gray-900 px-20">
+            <div className="grid grid-cols-1 gap-12 items-stretch justify-center md:grid-cols-2">
+              {latestPosts.length > 0 &&
+                latestPosts.map((post) => (
+                  <div key={post.id} className="flex flex-col gap-1 p-4">
+                    <div className="flex justify-evenly items-center">
+                      <p className="text-xs tracki uppercase dark:text-blue-700">
+                        {post.category}
+                      </p>
+                      <Link className="text-white font-semibold" href="#">
+                        {post.title}
+                      </Link>
+                    </div>
+                    <div>
+                      <img
+                        alt={post.title}
+                        className="object-cover w-full h-60 rounded-md"
+                        height={300}
+                        src="https://source.unsplash.com/200x200/?fashion?1"
+                        style={{
+                          aspectRatio: "400/300",
+                          objectFit: "cover",
+                        }}
+                        width={400}
+                      />
+                    </div>
+                  </div>
+                ))}
+            </div>
           </div>
         </div>
-      </div>
-      <div className="bg-gray-50 dark:bg-gray-950">
-        <div className="container grid max-w-6xl items-center justify-center gap-8 py-10 px-4 text-center md:py-16 md:px-6 lg:gap-12">
-          <div className="space-y-4">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
-              Contact Us
-            </h2>
-            <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
-              Ready to get started? Contact us now.
-            </p>
+        <div className="border-t border-gray-200">
+          <div className="container grid items-center justify-center gap-8 py-10 px-4 text-center md:py-16 md:px-6 lg:gap-12">
+            <div className="space-y-4">
+              <h2 className="text-white text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
+                About the Blog
+              </h2>
+              <p className="text-white mx-auto max-w-[700px] md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                We are open for new ideas and wishes, please send us a message.
+              </p>
+            </div>
           </div>
-          <form className="mx-auto max-w-sm space-y-4">
-            <div className="grid grid-cols-1 items-stretch justify-center">
-              <div className="flex flex-col gap-1">
-                <label className="text-sm font-medium" htmlFor="name">
-                  Name
-                </label>
-                <input id="name" placeholder="Enter your name" />
+        </div>
+        <div className="flex items-center justify-center h-screen">
+          {/* <img src={logo} alt="" className="w-40" /> */}
+          <div className="flex flex-row gap-32 justify-center w-3/4 p-6 rounded-xl sm:p-10 dark:bg-gray-900 dark:text-gray-100">
+            <div className="mb-8 text-center">
+              <h1 className="my-3 text-4xl font-bold">Let's talk</h1>
+              <p className="opacity-55">
+                If you have a problem send us a message
+              </p>
+              <img src={logo} alt="" className="w-96 rounded-xl opacity-75" />
+            </div>
+            <form ref={form} onSubmit={handleSubmit} className="space-y-12">
+              <div className="space-y-4">
+                <div>
+                  <label for="user_name" className="block mb-2 text-sm">
+                    Name
+                  </label>
+                  <input
+                    type="text"
+                    name="user_name"
+                    id="user_name"
+                    placeholder="John Doe"
+                    className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100"
+                    onChange={handleInputChange}
+                    // onChange={handleInputChange}
+                    value={emailData.user_name}
+                  />
+                </div>
+                <div>
+                  <div className="flex justify-between mb-2">
+                    <label for="user_email" className="text-sm">
+                      Email
+                    </label>
+                  </div>
+                  <input
+                    type="email"
+                    name="user_email"
+                    id="user_email"
+                    placeholder="john.doe@example.com"
+                    className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100"
+                    onChange={handleInputChange}
+                    // onChange={}
+                    value={emailData.user_email}
+                  />
+                </div>
+                <div>
+                  <div className="flex justify-between mb-2">
+                    <label for="message" className="text-sm">
+                      Your Message
+                    </label>
+                  </div>
+                  <textarea
+                    type="text"
+                    name="message"
+                    id="message"
+                    placeholder="Your message"
+                    className="w-full h-40 px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100"
+                    onChange={handleInputChange}
+                    // onChange={}
+                    value={emailData.message}
+                  />
+                </div>
               </div>
-              <div className="flex flex-col gap-1">
-                <label className="text-sm font-medium" htmlFor="email">
-                  Email
-                </label>
-                <input id="email" placeholder="Enter your email" />
+              <div className="space-y-2">
+                <div>
+                  <input
+                    type="submit"
+                    value="Send"
+                    className="w-full px-8 py-3 font-semibold rounded-md dark:bg-violet-400 hover:dark:bg-violet-600 dark:text-gray-900 cursor-pointer"
+                  />
+                </div>
               </div>
-              <div className="flex flex-col gap-1">
-                <label className="text-sm font-medium" htmlFor="message">
-                  Message
-                </label>
-                <textarea
-                  className="min-h-[100px] resize-none"
-                  id="message"
-                  placeholder="Enter your message"
-                />
-              </div>
-              <button className="w-full" type="submit">
-                Submit
-              </button>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
       </div>
-      <div className="bg-gray-50 dark:bg-gray-950">
-        <div className="container px-4 py-6 space-y-2 text-center md:space-y-0 md:flex md:items-center md:justify-between lg:space-y-0">
-          <nav className="flex items-center justify-center space-x-4 text-sm md:space-x-6 lg:space-x-8">
-            <Link
-              className="font-medium text-gray-900 dark:text-gray-50 hover:underline"
-              href="#"
-            >
-              Terms
-            </Link>
-            <Link
-              className="font-medium text-gray-900 dark:text-gray-50 hover:underline"
-              href="#"
-            >
-              Privacy
-            </Link>
-            <Link
-              className="font-medium text-gray-900 dark:text-gray-50 hover:underline"
-              href="#"
-            >
-              Support
-            </Link>
-          </nav>
-          <p className="text-sm text-gray-500 dark:text-gray-400">
-            © 2023 Blog. All rights reserved.
-          </p>
-        </div>
-      </div> */}
       {/* <h1 className="text-white text-center font-bold text-3xl italic shadow-md underline">
         Latest Posts
       </h1> */}
-      <div className="flex justify-center items-center">
+      {/* <div className="flex justify-center items-center">
         <div className="2xl:mx-auto 2xl:container lg:px-20 lg:py-16 md:py-12 md:px-6 py-9 px-4 w-96 sm:w-auto">
           <div className="flex flex-col items-center justify-center">
             <h1 className="text-4xl font-semibold leading-9 text-center text-white">
@@ -529,7 +494,7 @@ const Home = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </>
   );
 };

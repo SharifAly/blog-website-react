@@ -1,10 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import SkeletonLoader from "../components/SkeletonLoader";
+// import SkeletonLoader from "../components/SkeletonLoader";
 
 const Blog = () => {
   // const [filter, setFilter] = useState("All");
+
+  const truncateText = (text, limit) => {
+    if (text.length > limit) {
+      return text.substring(0, limit) + "...";
+    }
+    return text;
+  };
 
   const [blogData, setBlogData] = useState({
     title: "",
@@ -30,9 +37,9 @@ const Blog = () => {
   return (
     <>
       <section className=" dark:text-gray-100">
-        <div className="container max-w-6xl p-6 mx-auto space-y-6 sm:space-y-12">
-          <div className="grid grid-cols-1 gap-x-8 gap-y-8 md:grid-cols-2 lg:grid-cols-4">
-            {blogData.length < 0 && <SkeletonLoader />}
+        <div className="container max-w-6xl p-10 mx-auto space-y-6 sm:space-y-12 dark:bg-gray-900 rounded-xl">
+          <div className="grid grid-cols-1 gap-14 md:grid-cols-2 lg:grid-cols-4">
+            {/* {blogData.length < 0 && <SkeletonLoader />} */}
             {blogData.length > 0 &&
               blogData.map((post) => (
                 <article className="flex flex-col dark:bg-gray-900">
@@ -44,7 +51,7 @@ const Blog = () => {
                   >
                     <img
                       alt={post.title}
-                      className="object-cover w-full h-52 dark:bg-gray-500"
+                      className="object-cover w-full h-52 dark:bg-gray-500 rounded-xl"
                       src="https://source.unsplash.com/200x200/?fashion?1"
                     />
                   </Link>
@@ -56,11 +63,12 @@ const Blog = () => {
                     >
                       {post.category}
                     </p>
-                    <h3 className="flex-1 py-2 text-lg font-semibold leadi hover:underline">
+                    <h3 className="flex-1 py-2 text-lg font-semibold leadi hover:underline uppercase">
                       <Link to={`/details/${post.id}`} className="">
                         {post.title}
                       </Link>
                     </h3>
+                    <p>{truncateText(post.body, 70)}</p>
                     <div className="flex flex-wrap justify-between pt-3 space-x-2 text-xs dark:text-gray-400">
                       <span>
                         {new Date(post.created_at).toLocaleDateString("en-US", {
@@ -69,8 +77,13 @@ const Blog = () => {
                           year: "numeric",
                         })}
                       </span>
-                      <button className="hover:underline dark:text-violet-400">
-                        <Link to={`/details/${post.id}`}>read more</Link>
+                      <button>
+                        <Link
+                          className="text-xs inline-flex items-center font-medium hover:underline dark:text-violet-400"
+                          to={`/details/${post.id}`}
+                        >
+                          read more
+                        </Link>
                       </button>
                     </div>
                   </div>
