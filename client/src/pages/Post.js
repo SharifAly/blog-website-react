@@ -1,7 +1,7 @@
-import React, { useState } from "react"; // Import React and useState hook
-import logo from "../pictures/blog-images/computer-4484282_1280.jpg"; // Import logo image
-import axios from "axios"; // Import axios for making HTTP requests
-import { toast, ToastContainer } from "react-toastify"; // Import ToastContainer and toast for notifications
+import React, { useState } from "react";
+import logo from "../pictures/blog-images/computer-4484282_1280.jpg";
+import axios from "axios";
+import { toast, ToastContainer } from "react-toastify";
 
 const Post = () => {
   const [postData, setPostData] = useState({
@@ -9,66 +9,84 @@ const Post = () => {
     category: "Choose a category",
     body: "",
     image: "null",
-  }); // Initialize state for post data
+  });
 
-  const token = localStorage.getItem("token"); // Get token from localStorage
+  const token = localStorage.getItem("token");
 
   const handleSubmit = (e) => {
-    e.preventDefault(); // Prevent default form submission
+    e.preventDefault();
     if (postData.title === "") {
-      toast("Please enter a title"); // Show error if title is empty
+      toast("Please enter a title");
       return;
     } else if (postData.category === "Choose a category") {
-      toast("Please choose a category"); // Show error if category is not chosen
+      toast("Please choose a category");
       return;
     } else if (postData.body === "") {
-      toast("Please enter a text"); // Show error if body is empty
+      toast("Please enter a text");
       return;
     } else {
       axios
-        .post("http://localhost:5000/blog/post", postData, {withCredentials: true}, {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        }) // Make POST request to create a new post
+        .post(
+          "http://localhost:5000/blog/post",
+          postData,
+          { withCredentials: true },
+          {
+            headers: {
+              Authorization: "Bearer " + token,
+            },
+          }
+        )
         .then(() => {
-          toast("Posted Successfully"); // Show success message
+          toast("Posted Successfully");
           setPostData({
             title: "",
             category: "Choose a category",
             body: "",
             image: "null",
-          }); // Reset post data
+          });
         })
         .catch((err) => {
           if (err.response.status === 500) {
-            toast("Login to post a new story"); // Show error if user is not logged in
+            toast("Login to post a new story");
           } else {
-            toast("Create post failed"); // Show error if post creation failed
+            toast("Create post failed");
           }
         });
     }
-  }; // Handle form submission
+  };
 
   const handleInputChange = (e) => {
     setPostData({
       ...postData,
       [e.target.name]: e.target.value,
-    }); // Handle input changes and update state
-    console.log(postData); // Log post data for debugging
+    });
+    console.log(postData);
   };
 
   return (
     <>
-      <ToastContainer /> {/* Container for toast notifications */}
+      <ToastContainer />
       <div className="text-white">
-        <div className="flex items-center justify-center h-screen">
-          <div className="flex flex-row gap-32 justify-center w-3/4 p-6 rounded-xl sm:p-10 dark:bg-gray-900 dark:text-gray-100">
-            <div className="mb-8 text-center">
-              <h1 className="my-3 text-4xl font-bold">Post a new Story</h1>
-              <img src={logo} alt="" className="w-96 rounded-xl opacity-80" /> {/* Display logo image */}
+        <div className="flex items-center justify-center min-h-screen p-4">
+          {/* Hauptcontainer */}
+          <div className="flex flex-col lg:flex-row gap-8 justify-center w-full max-w-6xl p-6 rounded-xl sm:p-10 dark:bg-gray-900 dark:text-gray-100">
+            {/* Linker Bereich (Bild und Titel) */}
+            <div className="mb-8 text-center mx-auto lg:text-left lg:w-1/2">
+              <h1 className="my-3 text-3xl md:text-4xl font-bold">
+                Post a new Story
+              </h1>
+              <img
+                src={logo}
+                alt=""
+                className="w-full max-w-sm lg:max-w-md rounded-xl opacity-80"
+              />
             </div>
-            <form onSubmit={handleSubmit} className="space-y-12">
+
+            {/* Rechter Bereich (Formular) */}
+            <form
+              onSubmit={handleSubmit}
+              className="space-y-8 w-full lg:w-1/2"
+            >
               <div className="space-y-4">
                 <div>
                   <label htmlFor="title" className="block mb-2 text-sm">
@@ -82,17 +100,17 @@ const Post = () => {
                     className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100"
                     onChange={handleInputChange}
                     value={postData.title}
-                  /> {/* Input for title */}
+                  />
                   <select
                     id="pet-select"
-                    className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 mt-7 cursor-pointer opacity-60"
+                    className="w-full px-3 py-2 border rounded-md mt-5 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 cursor-pointer"
                     onChange={(e) =>
                       setPostData({ ...postData, category: e.target.value })
                     }
                     value={postData.category}
                     name="category"
                   >
-                    <option disabled="disabled">Choose a category</option>
+                    <option disabled>Choose a category</option>
                     <option value="lifestyle">Lifestyle</option>
                     <option value="health/fitness">Health and Fitness</option>
                     <option value="creativity/art">Creativity and Art</option>
@@ -103,14 +121,12 @@ const Post = () => {
                     <option value="culinary/recipes">
                       Culinary and Recipes
                     </option>
-                  </select> {/* Dropdown for category selection */}
+                  </select>
                 </div>
                 <div>
-                  <div className="flex justify-between mb-2">
-                    <label htmlFor="post" className="text-sm">
-                      Your Post
-                    </label>
-                  </div>
+                  <label htmlFor="post" className="block mb-2 text-sm">
+                    Your Post
+                  </label>
                   <textarea
                     type="text"
                     name="body"
@@ -119,18 +135,16 @@ const Post = () => {
                     className="w-full h-40 px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100"
                     onChange={handleInputChange}
                     value={postData.body}
-                  /> {/* Textarea for post body */}
+                  />
                 </div>
               </div>
-              <div className="space-y-2">
-                <div>
-                  <button
-                    type="submit"
-                    className="w-full px-8 py-3 font-semibold rounded-md dark:bg-violet-400 hover:dark:bg-violet-600 dark:text-gray-900"
-                  >
-                    Publish Post
-                  </button> {/* Submit button */}
-                </div>
+              <div>
+                <button
+                  type="submit"
+                  className="w-full px-8 py-3 font-semibold rounded-md dark:bg-violet-400 hover:dark:bg-violet-600 dark:text-gray-900"
+                >
+                  Publish Post
+                </button>
               </div>
             </form>
           </div>
@@ -140,4 +154,4 @@ const Post = () => {
   );
 };
 
-export default Post; // Export Post component
+export default Post;

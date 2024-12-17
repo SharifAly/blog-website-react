@@ -51,51 +51,66 @@ const Home = () => {
   };
 
   // State to store email data
-  const [emailData, setEmailData] = useState({
-    user_name: "",
-    user_email: "",
-    message: "",
-  });
+  // const [emailData, setEmailData] = useState({
+  //   user_name: "",
+  //   user_email: "",
+  //   message: "",
+  // });
 
-  const form = useRef();
+  // const form = useRef();
 
   // Handle input change for email form
-  const handleInputChange = (e) => {
-    setEmailData({
-      ...emailData,
-      [e.target.name]: e.target.value,
-    });
-  };
+  // const handleInputChange = (e) => {
+  //   setEmailData({
+  //     ...emailData,
+  //     [e.target.name]: e.target.value,
+  //   });
+  // };
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   // Handle form submission for sending email
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
 
-    emailjs
-      .sendForm("service_1zg6p5s", "template_o3bkkuk", form.current, {
-        publicKey: "tTRUGTPu9VXMH1cbC",
-      })
-      .then(
-        () => {
-          console.log("SUCCESS!");
-          setEmailData({
-            user_name: "",
-            user_email: "",
-            message: "",
-          });
-          navigate("/");
-        },
-        (error) => {
-          console.log("FAILED...", error.text);
-        }
-      );
-  };
+  //   emailjs
+  //     .sendForm("service_1zg6p5s", "template_o3bkkuk", form.current, {
+  //       publicKey: "tTRUGTPu9VXMH1cbC",
+  //     })
+  //     .then(
+  //       () => {
+  //         console.log("SUCCESS!");
+  //         setEmailData({
+  //           user_name: "",
+  //           user_email: "",
+  //           message: "",
+  //         });
+  //         navigate("/");
+  //       },
+  //       (error) => {
+  //         console.log("FAILED...", error.text);
+  //       }
+  //     );
+  // };
   return (
     <>
       <div className="flex justify-center flex-col items-center">
         {/* Header section */}
+         {/* About the blog section */}
+         <div className="border-b border-gray-200 mb-10">
+          <div className="container grid items-center justify-center gap-8 py-10 px-4 text-center md:py-16 md:px-6 lg:gap-12">
+            <div className="space-y-4">
+              <h2 className="text-white text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
+              Welcome to Your Daily Dose of Inspiration
+              </h2>
+              <p className="text-gray-200 mx-auto max-w-[700px] md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+              Discover thought-provoking articles, captivating stories, and expert insights on topics that matter. Whether you're seeking knowledge, inspiration, or just a great read, our blog has something for everyone. Explore, learn, and get inspired—one post at a time.
+
+Start reading now!
+              </p>
+            </div>
+          </div>
+        </div>
         <div className="grid items-center justify-center gap-4 px-4 text-center md:gap-8 md:px-6 lg:gap-12">
           <div className="space-y-4 lg:space-y-5 xl:space-y-6">
             <div className="space-y-4">
@@ -160,22 +175,9 @@ const Home = () => {
             </div>
           </div>
         </div>
-        {/* About the blog section */}
-        <div className="border-t border-gray-200">
-          <div className="container grid items-center justify-center gap-8 py-10 px-4 text-center md:py-16 md:px-6 lg:gap-12">
-            <div className="space-y-4">
-              <h2 className="text-white text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
-                About the Blog
-              </h2>
-              <p className="text-white mx-auto max-w-[700px] md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                We are open for new ideas and wishes, please send us a message.
-              </p>
-            </div>
-          </div>
-        </div>
+       
         {/* Contact form section */}
-        <div className="flex items-center justify-center h-screen">
-          {/* <img src={logo} alt="" className="w-40" /> */}
+        {/* <div className="flex items-center justify-center h-screen">
           <div className="flex flex-row gap-32 justify-center w-3/4 p-6 rounded-xl sm:p-10 dark:bg-gray-900 dark:text-gray-100">
             <div className="mb-8 text-center">
               <h1 className="my-3 text-4xl font-bold">Let's talk</h1>
@@ -197,7 +199,6 @@ const Home = () => {
                     placeholder="John Doe"
                     className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100"
                     onChange={handleInputChange}
-                    // onChange={handleInputChange}
                     value={emailData.user_name}
                   />
                 </div>
@@ -214,7 +215,6 @@ const Home = () => {
                     placeholder="john.doe@example.com"
                     className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100"
                     onChange={handleInputChange}
-                    // onChange={}
                     value={emailData.user_email}
                   />
                 </div>
@@ -231,7 +231,6 @@ const Home = () => {
                     placeholder="Your message"
                     className="w-full h-40 px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100"
                     onChange={handleInputChange}
-                    // onChange={}
                     value={emailData.message}
                   />
                 </div>
@@ -247,7 +246,7 @@ const Home = () => {
               </div>
             </form>
           </div>
-        </div>
+        </div> */}
       </div>
       {/* <h1 className="text-white text-center font-bold text-3xl italic shadow-md underline">
         Latest Posts

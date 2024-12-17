@@ -25,7 +25,7 @@ const Blog = () => {
       .get("http://localhost:5000/blog/blog")
       .then((res) => {
         setBlogData(res.data);
-        console.log(res.data);
+        // console.log(res.data);
         
         setLoading(false);
       })
