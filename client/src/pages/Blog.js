@@ -6,24 +6,14 @@ import SkeletonLoader from "../components/SkeletonLoader";
 
 const Blog = () => {
   // State to hold the loading status
-const [loading, setLoading] = useState(false);
-  // Function to truncate text to a specified limit
-  const truncateText = (text, limit) => {
-    if (text.length > limit) {
-      return text.substring(0, limit) + "...";
-    }
-    return text;
-  };
+  const [loading, setLoading] = useState(false);
 
-  // State to hold the blog data fetched from the server
-  const [blogData, setBlogData] = useState({
-    title: "",
-    category: "",
-    content: "",
-    image: null,
-    author: "",
-    date: "",
-  });
+  // State to hold all blog data
+  const [blogData, setBlogData] = useState([]);
+
+  // State for pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const postsPerPage = 6;
 
   // http://localhost:5000/blog/blog api from backend
   // https://jsonplaceholder.typicode.com/posts dummy data
@@ -32,91 +22,101 @@ const [loading, setLoading] = useState(false);
   useEffect(() => {
     setLoading(true);
     axios
-      .get("https://jsonplaceholder.typicode.com/posts")
+      .get("http://localhost:5000/blog/blog")
       .then((res) => {
         setBlogData(res.data);
         console.log(res.data);
+        
         setLoading(false);
       })
       .catch((err) => {
         console.log(err);
+        setLoading(false);
       });
   }, []);
+
+  // Logic to paginate posts
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = blogData.slice(indexOfFirstPost, indexOfLastPost);
+
+  // Change page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   if (loading) {
     return (
       <section className="dark:text-gray-100">
         <div className="container max-w-6xl p-10 mx-auto space-y-6 sm:space-y-12 dark:bg-gray-900 rounded-xl shadow-2xl">
           <div className="grid grid-cols-1 gap-14 md:grid-cols-2 lg:grid-cols-4">
-            {Array.from({ length: 12 }).map((_, index) => (
-              <article className="flex flex-col dark:bg-gray-900">
+            {Array.from({ length: 6 }).map((_, index) => (
               <SkeletonLoader key={index} />
-              </article>
             ))}
           </div>
         </div>
       </section>
-    )
-    ;
+    );
   }
 
   return (
     <>
-      <section className=" dark:text-gray-100">
+      <section className="dark:text-gray-100">
         <div className="container max-w-6xl p-10 mx-auto space-y-6 sm:space-y-12 dark:bg-gray-900 rounded-xl shadow-2xl">
-          <div className="grid grid-cols-1 gap-14 md:grid-cols-2 lg:grid-cols-4">
-            {/* Render SkeletonLoader if blogData is empty */}
-            {/* {blogData.length < 0 && <SkeletonLoader />} */}
-            {/* Map through the blogData and render each post */}
-            {blogData.length > 0 &&
-              blogData.map((post) => (
-                <article className="flex flex-col dark:bg-gray-900">
-                  <Link
-                    key={post.id}
-                    rel="noopener noreferrer"
-                    href="#"
-                    aria-label="Te nulla oportere reprimique his dolorum"
-                  >
-                    <img
-                      alt={post.title}
-                      className="object-cover w-full h-52 dark:bg-gray-500 rounded-xl"
-                      src={picture}
-                    />
-                  </Link>
-                  <div className="flex flex-col flex-1 p-6">
-                    <p
-                      rel="noopener noreferrer"
-                      href="#"
-                      className="text-xs tracki uppercase dark:text-blue-700"
+          {/* Blog Posts */}
+          <div className="grid grid-cols-1 gap-14 md:grid-cols-2 lg:grid-cols-3">
+            {currentPosts.map((post) => (
+              <article key={post.id} className="flex flex-col dark:bg-gray-900">
+                <Link to={`/details/${post.id}`} aria-label={post.title}>
+                  <img
+                    alt={post.title}
+                    className="object-cover w-full h-52 dark:bg-gray-500 rounded-xl"
+                    src={picture}
+                  />
+                </Link>
+                <div className="flex flex-col flex-1 p-6">
+                  <p className="text-xs uppercase dark:text-blue-700">
+                    {post.category}
+                  </p>
+                  <h3 className="flex-1 py-2 text-lg font-semibold uppercase hover:underline">
+                    <Link to={`/details/${post.id}`}>{post.title}</Link>
+                  </h3>
+                  <p>{post.content ? post.content.substring(0, 70) + "..." : ""}</p>
+                  <div className="flex justify-between pt-3 text-xs dark:text-gray-400">
+                    <span>
+                      {new Date(post.created_at).toLocaleDateString("en-US", {
+                        day: "numeric",
+                        month: "long",
+                        year: "numeric",
+                      })}
+                    </span>
+                    <Link
+                      to={`/details/${post.id}`}
+                      className="hover:underline dark:text-violet-400"
                     >
-                      {post.category}
-                    </p>
-                    <h3 className="flex-1 py-2 text-lg font-semibold leadi hover:underline uppercase">
-                      <Link to={`/details/${post.id}`} className="">
-                        {post.title}
-                      </Link>
-                    </h3>
-                    <p>{truncateText(post.body, 70)}</p>
-                    <div className="flex flex-wrap justify-between pt-3 space-x-2 text-xs dark:text-gray-400">
-                      <span>
-                        {new Date(post.created_at).toLocaleDateString("en-US", {
-                          day: "numeric",
-                          month: "long",
-                          year: "numeric",
-                        })}
-                      </span>
-                      <button>
-                        <Link
-                          className="text-xs inline-flex items-center font-medium hover:underline dark:text-violet-400"
-                          to={`/details/${post.id}`}
-                        >
-                          read more
-                        </Link>
-                      </button>
-                    </div>
+                      read more
+                    </Link>
                   </div>
-                </article>
-              ))}
+                </div>
+              </article>
+            ))}
+          </div>
+
+          {/* Pagination */}
+          <div className="flex justify-center space-x-2 mt-8">
+            {Array.from({ length: Math.ceil(blogData.length / postsPerPage) }).map(
+              (_, index) => (
+                <button
+                  key={index}
+                  onClick={() => paginate(index + 1)}
+                  className={`px-3 py-1 rounded ${
+                    currentPage === index + 1
+                      ? "bg-blue-600 text-white"
+                      : "bg-gray-200 text-gray-800"
+                  }`}
+                >
+                  {index + 1}
+                </button>
+              )
+            )}
           </div>
         </div>
       </section>

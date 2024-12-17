@@ -7,20 +7,7 @@ const router = express.Router();
 
 //TODO - Add a route to register a new user
 
-// login
-// values to decode jwt
-// {2 items
-// "header":{2 items
-// "alg":"HS256"
-// "typ":"JWT"
-// }
-// "payload":{4 items
-// "userEmail":"sharif.aly_@outlook.com"
-// "userId":11
-// "iat":1707648117
-// "exp":1707651717
-// }
-// }
+
 
 // Route to handle user login
 router.post("/login", async (req, res) => {
@@ -139,14 +126,5 @@ router.post("/register", (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 });
-
-// json data to insert to register user from form
-// {
-//   "f_name": "sharif",
-//   "l_name": "aly",
-//   "email": "sharif.aly_@outlook.com",
-//   "role": "User",
-//   "password": "1234"
-// }
 
 export default router;
