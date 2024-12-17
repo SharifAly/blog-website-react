@@ -28,13 +28,16 @@ const Login = () => {
           email: "",
           password: "",
         });
+        setTimeout(() => { 
+        //FIXME - The redirect ist not working, 
+        // but the login is successful, 
+        // if i redirect directly the localstorage is empty
+          navigate("/");
+        }, 500);
         console.log("Before localStorage update");
         localStorage.setItem("loggedIn", "true");
         localStorage.setItem("userId", res.data.userId);
         console.log("After localStorage update");
-        setTimeout(() => {
-          navigate("/");
-        }, 100);
         window.location.reload(false);
       })
       .catch((err) => {

@@ -5,8 +5,7 @@ import picture from "../pictures/blog-images/computer-4484282_1280.jpg";
 // import SkeletonLoader from "../components/SkeletonLoader";
 
 const Blog = () => {
-  // const [filter, setFilter] = useState("All");
-
+  // Function to truncate text to a specified limit
   const truncateText = (text, limit) => {
     if (text.length > limit) {
       return text.substring(0, limit) + "...";
@@ -14,6 +13,7 @@ const Blog = () => {
     return text;
   };
 
+  // State to hold the blog data fetched from the server
   const [blogData, setBlogData] = useState({
     title: "",
     category: "",
@@ -23,6 +23,7 @@ const Blog = () => {
     date: "",
   });
 
+  // Fetch blog data from the server when the component mounts
   useEffect(() => {
     axios
       .get("http://localhost:5000/blog/blog")
@@ -40,7 +41,9 @@ const Blog = () => {
       <section className=" dark:text-gray-100">
         <div className="container max-w-6xl p-10 mx-auto space-y-6 sm:space-y-12 dark:bg-gray-900 rounded-xl">
           <div className="grid grid-cols-1 gap-14 md:grid-cols-2 lg:grid-cols-4">
+            {/* Render SkeletonLoader if blogData is empty */}
             {/* {blogData.length < 0 && <SkeletonLoader />} */}
+            {/* Map through the blogData and render each post */}
             {blogData.length > 0 &&
               blogData.map((post) => (
                 <article className="flex flex-col dark:bg-gray-900">

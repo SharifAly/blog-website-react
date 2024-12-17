@@ -7,6 +7,7 @@ import axios from "axios";
 
 
 const Home = () => {
+  // State to store the latest posts
   const [latestPosts, setLatestPosts] = useState({
     title: "",
     category: "",
@@ -14,6 +15,7 @@ const Home = () => {
     author: "",
   });
 
+  // Fetch the latest posts from the server
   useEffect(() => {
     axios
       .get("http://localhost:5000/blog/latest")
@@ -24,6 +26,7 @@ const Home = () => {
         console.log(err);
       });
   }, []);
+  // Calculate the time difference between current time and login time
   const currentTime = new Date().getTime();
   const loginTime = localStorage.getItem("setCurrentTime");
 
@@ -32,12 +35,14 @@ const Home = () => {
   const diffHours = Math.abs(diffMs / 1000 / 60 / 60);
   const diffHoursRound = Math.round(diffHours);
 
+  // Clear local storage if the time difference is greater than 12 hours
   useEffect(() => {
     if (diffHoursRound > 12) {
       localStorage.clear();
     }
   }, [diffHoursRound, diffHours]);
 
+  // Function to truncate text to a specified limit
   const truncateText = (text, limit) => {
     if (text.length > limit) {
       return text.substring(0, limit) + "...";
@@ -45,6 +50,7 @@ const Home = () => {
     return text;
   };
 
+  // State to store email data
   const [emailData, setEmailData] = useState({
     user_name: "",
     user_email: "",
@@ -53,6 +59,7 @@ const Home = () => {
 
   const form = useRef();
 
+  // Handle input change for email form
   const handleInputChange = (e) => {
     setEmailData({
       ...emailData,
@@ -62,6 +69,7 @@ const Home = () => {
 
   const navigate = useNavigate();
 
+  // Handle form submission for sending email
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -87,6 +95,7 @@ const Home = () => {
   return (
     <>
       <div className="flex justify-center flex-col items-center">
+        {/* Header section */}
         <div className="grid items-center justify-center gap-4 px-4 text-center md:gap-8 md:px-6 lg:gap-12">
           <div className="space-y-4 lg:space-y-5 xl:space-y-6">
             <div className="space-y-4">
@@ -101,6 +110,7 @@ const Home = () => {
             </div>
           </div>
         </div>
+        {/* Latest posts section */}
         <div className="container grid items-center justify-center gap-8 py-10 px-4 text-center md:py-16 md:px-6 lg:gap-12">
           <div className="rounded-lg dark:bg-gray-900 px-20">
             <div className="grid grid-cols-1 gap-24 items-stretch justify-center md:grid-cols-2">
@@ -150,6 +160,7 @@ const Home = () => {
             </div>
           </div>
         </div>
+        {/* About the blog section */}
         <div className="border-t border-gray-200">
           <div className="container grid items-center justify-center gap-8 py-10 px-4 text-center md:py-16 md:px-6 lg:gap-12">
             <div className="space-y-4">
@@ -162,6 +173,7 @@ const Home = () => {
             </div>
           </div>
         </div>
+        {/* Contact form section */}
         <div className="flex items-center justify-center h-screen">
           {/* <img src={logo} alt="" className="w-40" /> */}
           <div className="flex flex-row gap-32 justify-center w-3/4 p-6 rounded-xl sm:p-10 dark:bg-gray-900 dark:text-gray-100">

@@ -5,9 +5,9 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-// state hold the register user data from input fields
-
+// Component to handle user registration
 const Register = () => {
+  // State to hold the registration data from input fields
   const [regData, setRegData] = useState({
     f_name: "",
     l_name: "",
@@ -15,8 +15,7 @@ const Register = () => {
     password: "",
   });
 
-  // function to update the state from input fields
-
+  // Function to update the state from input fields
   const handleInputChange = (e) => {
     setRegData({
       ...regData,
@@ -24,15 +23,13 @@ const Register = () => {
     });
   };
 
-  // initialize useNavigate to render login after registered
-
+  // Initialize useNavigate to redirect to login after registration
   const navigate = useNavigate();
 
-  // function to submit the data to backend
-
+  // Function to submit the data to the backend
   const handleSubmit = (e) => {
     e.preventDefault();
-    // validate the input fields, before send data, if its not complete, is stoping the code
+    // Validate the input fields before sending data
     if (!regData.f_name) {
       toast("Please enter your first name");
       return;
@@ -50,23 +47,22 @@ const Register = () => {
       return;
     }
 
-    // post request to send data to backend
-
+    // Post request to send data to the backend
     axios
       .post("http://localhost:5000/register", regData)
       .then(() => {
         toast("Registration successful");
-        // set the input fields to empty after registration
+        // Reset the input fields after registration
         setRegData({
           f_name: "",
           l_name: "",
           email: "",
           password: "",
         });
-        // navigate to login after succesfull registration
+        // Navigate to login after successful registration
         navigate("/login");
       })
-      // if the email already exists, is stopping the code and show the message
+      // Handle error if the email already exists
       .catch((error) => {
         if (error.response.status === 400) {
           toast(error.response.data);
@@ -84,7 +80,7 @@ const Register = () => {
             <h1 className="my-3 text-4xl font-bold">Sign up</h1>
             {/* <p className="text-sm dark:text-gray-400">Sign up for free</p> */}
           </div>
-          {/* form to register the user */}
+          {/* Form to register the user */}
           <form className="space-y-12" onSubmit={handleSubmit}>
             <div className="space-y-4">
               <div>
@@ -183,7 +179,8 @@ const Register = () => {
 };
 
 export default Register;
-// json data to insert to register user from form
+
+// JSON data to insert to register user from form
 // {
 //   "f_name": "sharif",
 //   "l_name": "aly",

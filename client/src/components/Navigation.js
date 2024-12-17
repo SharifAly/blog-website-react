@@ -6,25 +6,25 @@ import Cookies from "js-cookie";
 // import axios from "axios";
 
 const Navigation = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // State to track login status
+
   const handleLogout = () => {
-    localStorage.clear();
-    Cookies.remove("token");
-    setIsLoggedIn(false);
+    localStorage.clear(); // Clear local storage
+    Cookies.remove("token"); // Remove token cookie // FIXME remove token not working until now
+    setIsLoggedIn(false); // Update login status
     return false;
   };
 
   useEffect(() => {
     if (localStorage.getItem("loggedIn")) {
-      setIsLoggedIn(true);
+      setIsLoggedIn(true); // Set login status based on local storage
     }
   }, []);
-
 
   useEffect(() => {
     const checkIsLoggedIn = localStorage.getItem("loggedIn", true);
     if (checkIsLoggedIn) {
-      setIsLoggedIn(true);
+      setIsLoggedIn(true); // Set login status based on local storage
     }
   }, []);
 
@@ -33,15 +33,16 @@ const Navigation = () => {
       <nav className="shadow-md mb-10">
         <div className="nav flex items-center justify-between px-4 py-3">
           <div className="flex justify-center items-center">
-            {/* <div className="h-6 w-6 rounded-lg bg-gray-900 dark:bg-gray-50" /> */}
+            {/* Logo */}
             <span className="font-semibold text-lg text-white">
-            <NavLink to="/">
-            <img src={logo} alt="logo" className="w-12 h-12" />
-            </NavLink>
+              <NavLink to="/">
+                <img src={logo} alt="logo" className="w-12 h-12" />
+              </NavLink>
             </span>
           </div>
 
           <div className="flex space-x-4">
+            {/* Navigation Links */}
             <NavLink
               to="/blog"
               className="text-white hover:text-gray-500 px-3 py-2 text-base font-medium"
@@ -86,7 +87,6 @@ const Navigation = () => {
                 />
               </svg>
             </div>
-
             <NavLink
               to="/contact"
               className="text-white hover:text-gray-500 px-3 py-2 text-base font-medium"
@@ -96,6 +96,7 @@ const Navigation = () => {
           </div>
 
           <div>
+            {/* Search Input */}
             <input
               type="text"
               placeholder="Search"
@@ -106,6 +107,7 @@ const Navigation = () => {
           <div>
             {isLoggedIn ? (
               <div className="flex justify-between items-center">
+                {/* Profile Link */}
                 <NavLink to={`/profile/${localStorage.getItem("userId")}`}>
                   <div className="relative flex-shrink-0">
                     <img
@@ -116,6 +118,7 @@ const Navigation = () => {
                   </div>
                 </NavLink>
 
+                {/* Logout Button */}
                 <button
                   className="bg-blue-700 hover:bg-blue-800 text-white px-3 py-2 text-base font-medium rounded-full ms-3"
                   onClick={handleLogout}

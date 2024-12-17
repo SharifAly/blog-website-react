@@ -4,17 +4,22 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 const Profile = () => {
+  // State to hold profile data
   const [profileData, setProfileData] = useState({
     firstName: "",
     lastName: "",
     email: "",
   });
+  
+  // Get the user ID from the URL parameters
   const { id } = useParams();
 
+  // Fetch profile data when the component mounts or the ID changes
   useEffect(() => {
     axios
       .get(`http://localhost:5000/profile/${id}`)
       .then((res) => {
+        // Update state with the fetched data
         setProfileData(res.data);
         console.log(profileData);
       })
