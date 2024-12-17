@@ -49,7 +49,7 @@ const Register = () => {
 
     // Post request to send data to the backend
     axios
-      .post("http://localhost:5000/register", regData)
+      .post("http://localhost:5000/auth/register", regData)
       .then(() => {
         toast("Registration successful");
         // Reset the input fields after registration

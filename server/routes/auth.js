@@ -5,6 +5,8 @@ import db from "../middleware/db.js";
 
 const router = express.Router();
 
+//TODO - Add a route to register a new user
+
 router.post("/login", async (req, res) => {
   try {
     const email = req.body.email;
