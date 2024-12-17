@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import picture from "../pictures/blog-images/computer-4484282_1280.jpg";
 // import SkeletonLoader from "../components/SkeletonLoader";
 
 const Blog = () => {
@@ -52,7 +53,7 @@ const Blog = () => {
                     <img
                       alt={post.title}
                       className="object-cover w-full h-52 dark:bg-gray-500 rounded-xl"
-                      src="https://source.unsplash.com/200x200/?fashion?1"
+                      src={picture}
                     />
                   </Link>
                   <div className="flex flex-col flex-1 p-6">

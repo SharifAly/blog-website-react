@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
+import logo from "../pictures/logo/icons8-blogger-50 (1).png"
+import picture from "../pictures/blog-images/sharif.jpg";
 // import axios from "axios";
 
 const Navigation = () => {
@@ -21,9 +23,11 @@ const Navigation = () => {
       <nav className="shadow-md mb-10">
         <div className="nav flex items-center justify-between px-4 py-3">
           <div className="flex justify-center items-center">
-            <div className="h-6 w-6 rounded-lg bg-gray-900 dark:bg-gray-50" />
+            {/* <div className="h-6 w-6 rounded-lg bg-gray-900 dark:bg-gray-50" /> */}
             <span className="font-semibold text-lg text-white">
-              <NavLink to="/">Blog</NavLink>
+            <NavLink to="/">
+            <img src={logo} alt="logo" className="w-12 h-12" />
+            </NavLink>
             </span>
           </div>
 
@@ -95,7 +99,7 @@ const Navigation = () => {
                 <NavLink to={`/profile/${localStorage.getItem("userId")}`}>
                   <div className="relative flex-shrink-0">
                     <img
-                      src="https://source.unsplash.com/50x50/?portrait"
+                      src={picture}
                       alt=""
                       className="w-10 h-10 border rounded-full dark:bg-gray-500 dark:border-gray-700"
                     />
@@ -119,8 +123,6 @@ const Navigation = () => {
             )}
           </div>
         </div>
-
-        {/* <hr className="border-gray-200" /> */}
       </nav>
     </div>
   );

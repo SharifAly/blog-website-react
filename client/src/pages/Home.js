@@ -2,9 +2,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import emailjs from "@emailjs/browser";
 import logo from "../pictures/blog-images/work-4997565_1280.png";
+import picture from "../pictures/blog-images/computer-4484282_1280.jpg";
 import axios from "axios";
 
-// sql query for the last four posts
 
 const Home = () => {
   const [latestPosts, setLatestPosts] = useState({
@@ -37,6 +37,13 @@ const Home = () => {
       localStorage.clear();
     }
   }, [diffHoursRound, diffHours]);
+
+  const truncateText = (text, limit) => {
+    if (text.length > limit) {
+      return text.substring(0, limit) + "...";
+    }
+    return text;
+  };
 
   const [emailData, setEmailData] = useState({
     user_name: "",
@@ -79,8 +86,8 @@ const Home = () => {
   };
   return (
     <>
-      <div className="flex justify-center flex-col">
-        <div className="container grid items-center justify-center gap-4 px-4 text-center md:gap-8 md:px-6 lg:gap-12">
+      <div className="flex justify-center flex-col items-center">
+        <div className="grid items-center justify-center gap-4 px-4 text-center md:gap-8 md:px-6 lg:gap-12">
           <div className="space-y-4 lg:space-y-5 xl:space-y-6">
             <div className="space-y-4">
               <h2 className="text-3xl text-white font-bold tracking-tighter sm:text-4xl md:text-5xl">
@@ -96,32 +103,55 @@ const Home = () => {
         </div>
         <div className="container grid items-center justify-center gap-8 py-10 px-4 text-center md:py-16 md:px-6 lg:gap-12">
           <div className="rounded-lg dark:bg-gray-900 px-20">
-            <div className="grid grid-cols-1 gap-12 items-stretch justify-center md:grid-cols-2">
+            <div className="grid grid-cols-1 gap-24 items-stretch justify-center md:grid-cols-2">
               {latestPosts.length > 0 &&
                 latestPosts.map((post) => (
-                  <div key={post.id} className="flex flex-col gap-1 p-4">
-                    <div className="flex justify-evenly items-center">
-                      <p className="text-xs tracki uppercase dark:text-blue-700">
-                        {post.category}
-                      </p>
-                      <Link className="text-white font-semibold" href="#">
-                        {post.title}
-                      </Link>
-                    </div>
-                    <div>
+                  <article className="flex flex-col dark:bg-gray-900">
+                    <Link
+                      key={post.id}
+                      rel="noopener noreferrer"
+                      href="#"
+                      aria-label="Te nulla oportere reprimique his dolorum"
+                    >
                       <img
                         alt={post.title}
-                        className="object-cover w-full h-60 rounded-md"
-                        height={300}
-                        src="https://source.unsplash.com/200x200/?fashion?1"
-                        style={{
-                          aspectRatio: "400/300",
-                          objectFit: "cover",
-                        }}
-                        width={400}
+                        className="object-cover w-full h-52 dark:bg-gray-500 rounded-xl"
+                        src={picture}
                       />
+                    </Link>
+                    <div className="flex flex-col flex-1 p-6">
+                      <p
+                        rel="noopener noreferrer"
+                        href="#"
+                        className="text-xs tracki uppercase dark:text-blue-700"
+                      >
+                        {post.category}
+                      </p>
+                      <h3 className="flex-1 py-2 text-lg font-semibold leadi hover:underline uppercase">
+                        <Link to={`/details/${post.id}`} className="text-white">
+                          {post.title}
+                        </Link>
+                      </h3>
+                      <p>{truncateText(post.body, 70)}</p>
+                      <div className="flex flex-wrap justify-between pt-3 space-x-2 text-xs dark:text-gray-400">
+                        <span>
+                          {new Date(post.created_at).toLocaleDateString("en-US", {
+                            day: "numeric",
+                            month: "long",
+                            year: "numeric",
+                          })}
+                        </span>
+                        <button>
+                          <Link
+                            className="text-xs inline-flex items-center font-medium hover:underline dark:text-violet-400"
+                            to={`/details/${post.id}`}
+                          >
+                            read more
+                          </Link>
+                        </button>
+                      </div>
                     </div>
-                  </div>
+                  </article>
                 ))}
             </div>
           </div>
