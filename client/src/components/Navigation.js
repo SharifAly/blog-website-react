@@ -2,18 +2,27 @@ import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import logo from "../pictures/logo/icons8-blogger-50 (1).png"
 import picture from "../pictures/blog-images/sharif.jpg";
+import Cookies from "js-cookie";
 // import axios from "axios";
 
 const Navigation = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  // const [userData, setUserData] = useState("");
   const handleLogout = () => {
     localStorage.clear();
+    Cookies.remove("token", { path: "/auth/login" });
     setIsLoggedIn(false);
   };
 
   useEffect(() => {
     if (localStorage.getItem("loggedIn")) {
+      setIsLoggedIn(true);
+    }
+  }, []);
+
+
+  useEffect(() => {
+    const checkIsLoggedIn = localStorage.getItem("loggedIn", true);
+    if (checkIsLoggedIn) {
       setIsLoggedIn(true);
     }
   }, []);

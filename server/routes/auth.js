@@ -5,41 +5,6 @@ import db from "../middleware/db.js";
 
 const router = express.Router();
 
-router.post("/register", (req, res) => {
-  try {
-    const { f_name, l_name, email, password } = req.body;
-    const hashedPassword = bcrypt.hashSync(password, 10);
-    const checkEmailExcist = "SELECT * FROM blog.users WHERE email = ?";
-    db.query(checkEmailExcist, [email], (err, result) => {
-      if (err) {
-        console.log(err);
-        res.status(500).send("Internal Server Error");
-      } else {
-        if (result.length > 0) {
-          res.status(400).send("Email already exists");
-        } else {
-          const registerNewUserQuery =
-            "INSERT INTO blog.users (first_name, last_name, email, password) VALUES (?,?,?,?)";
-          db.query(
-            registerNewUserQuery,
-            [f_name, l_name, email, hashedPassword],
-            (err, result) => {
-              if (err) {
-                console.log(err);
-                res.status(500).send("Internal Server Error");
-              } else {
-                res.send(result);
-              }
-            }
-          );
-        }
-      }
-    });
-  } catch (error) {
-    console.log(error);
-  }
-});
-
 router.post("/login", async (req, res) => {
   try {
     const email = req.body.email;
@@ -80,17 +45,17 @@ router.post("/login", async (req, res) => {
           userId: result[0].id,
         },
         process.env.JWT_SECRET_KEY,
-        { expiresIn: "5h" }
+        { expiresIn: "10h" }
       );
 
       res.cookie("token", token, {
         httpOnly: true,
-        maxAge: 5 * 60 * 60 * 1000, // 5 hours
+        maxAge: 10 * 60 * 60 * 1000, // 10 hours
       });
 
       return res.status(200).send({
         message: "Logged in!",
-        userId: result[0].id,
+        userId: result[0].id, // Ensure userId is sent in the response
       });
     }
 

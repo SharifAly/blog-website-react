@@ -16,7 +16,7 @@ const Home = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/latest")
+      .get("http://localhost:5000/blog/latest")
       .then((res) => {
         setLatestPosts(res.data);
       })
