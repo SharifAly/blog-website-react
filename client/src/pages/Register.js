@@ -12,6 +12,7 @@ const Register = () => {
     f_name: "",
     l_name: "",
     email: "",
+    role: "User",
     password: "",
   });
 
@@ -57,6 +58,7 @@ const Register = () => {
           f_name: "",
           l_name: "",
           email: "",
+          role: "User",
           password: "",
         });
         // Navigate to login after successful registration

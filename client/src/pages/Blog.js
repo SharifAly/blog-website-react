@@ -2,9 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import picture from "../pictures/blog-images/computer-4484282_1280.jpg";
-// import SkeletonLoader from "../components/SkeletonLoader";
+import SkeletonLoader from "../components/SkeletonLoader";
 
 const Blog = () => {
+  // State to hold the loading status
+const [loading, setLoading] = useState(false);
   // Function to truncate text to a specified limit
   const truncateText = (text, limit) => {
     if (text.length > limit) {
@@ -23,23 +25,45 @@ const Blog = () => {
     date: "",
   });
 
+  // http://localhost:5000/blog/blog api from backend
+  // https://jsonplaceholder.typicode.com/posts dummy data
+
   // Fetch blog data from the server when the component mounts
   useEffect(() => {
+    setLoading(true);
     axios
-      .get("http://localhost:5000/blog/blog")
+      .get("https://jsonplaceholder.typicode.com/posts")
       .then((res) => {
         setBlogData(res.data);
-        // console.log(blogData);
+        console.log(res.data);
+        setLoading(false);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
 
+  if (loading) {
+    return (
+      <section className="dark:text-gray-100">
+        <div className="container max-w-6xl p-10 mx-auto space-y-6 sm:space-y-12 dark:bg-gray-900 rounded-xl shadow-2xl">
+          <div className="grid grid-cols-1 gap-14 md:grid-cols-2 lg:grid-cols-4">
+            {Array.from({ length: 12 }).map((_, index) => (
+              <article className="flex flex-col dark:bg-gray-900">
+              <SkeletonLoader key={index} />
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+    ;
+  }
+
   return (
     <>
       <section className=" dark:text-gray-100">
-        <div className="container max-w-6xl p-10 mx-auto space-y-6 sm:space-y-12 dark:bg-gray-900 rounded-xl">
+        <div className="container max-w-6xl p-10 mx-auto space-y-6 sm:space-y-12 dark:bg-gray-900 rounded-xl shadow-2xl">
           <div className="grid grid-cols-1 gap-14 md:grid-cols-2 lg:grid-cols-4">
             {/* Render SkeletonLoader if blogData is empty */}
             {/* {blogData.length < 0 && <SkeletonLoader />} */}

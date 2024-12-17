@@ -21,12 +21,12 @@ const Details = () => {
       .get(`http://localhost:5000/blog/details/${id}`)
       .then((res) => {
         setPostData(res.data);
-        console.log(postData);
+        console.log(res.data);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, [id, postData]);
+  }, [id]);
 
   return (
     <div>
@@ -63,8 +63,8 @@ const Details = () => {
                 />
               </div>
             </div>
-            <div className="mt-8">
-              <p className="font-normal text-base leading-6 text-gray-300 ">
+            <div className="mt-8 dark:bg-gray-500 p-8 rounded-lg">
+              <p className="font-normal text-base leading-6 text-gray-300">
                 {post.body}
               </p>
             </div>

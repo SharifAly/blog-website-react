@@ -112,7 +112,7 @@ const Home = () => {
         </div>
         {/* Latest posts section */}
         <div className="container grid items-center justify-center gap-8 py-10 px-4 text-center md:py-16 md:px-6 lg:gap-12">
-          <div className="rounded-lg dark:bg-gray-900 px-20">
+          <div className="rounded-lg dark:bg-gray-900 px-20 shadow-2xl">
             <div className="grid grid-cols-1 gap-24 items-stretch justify-center md:grid-cols-2">
               {latestPosts.length > 0 &&
                 latestPosts.map((post) => (
@@ -140,12 +140,12 @@ const Home = () => {
       {post.category}
     </p>
     <h3 className="flex-1 py-2 text-lg font-semibold leadi hover:underline uppercase">
-      <Link to={`/details/${post.id}`} className="text-white">
+      <Link to={`/details/${post.id}`} className="dark:text-gray-300">
         {post.title}
       </Link>
     </h3>
-    <p>{truncateText(post.body, 70)}</p>
-    <div className="flex flex-wrap justify-between pt-3 space-x-2 text-xs dark:text-gray-400">
+    <p className="text-white">{truncateText(post.body, 70)}</p>
+    <div className="flex flex-wrap justify-between pt-3 space-x-2 text-xs dark:text-gray-300">
       <span>
         {new Date(post.created_at).toLocaleDateString("en-US", {
           day: "numeric",
