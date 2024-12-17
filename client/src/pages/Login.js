@@ -34,7 +34,7 @@ const Login = () => {
         console.log("After localStorage update");
         setTimeout(() => {
           navigate("/");
-        }, 200);
+        }, 100);
         window.location.reload(false);
       })
       .catch((err) => {

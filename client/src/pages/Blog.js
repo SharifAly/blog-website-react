@@ -25,7 +25,7 @@ const Blog = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/blog")
+      .get("http://localhost:5000/blog/blog")
       .then((res) => {
         setBlogData(res.data);
         // console.log(blogData);

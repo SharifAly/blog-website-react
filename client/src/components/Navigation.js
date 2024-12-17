@@ -9,8 +9,9 @@ const Navigation = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const handleLogout = () => {
     localStorage.clear();
-    Cookies.remove("token", { path: "/auth/login" });
+    Cookies.remove("token");
     setIsLoggedIn(false);
+    return false;
   };
 
   useEffect(() => {
