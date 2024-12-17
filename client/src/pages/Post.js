@@ -26,7 +26,7 @@ const Post = () => {
       return;
     } else {
       axios
-        .post("http://localhost:5000/blog/post", postData, {
+        .post("http://localhost:5000/blog/post", postData, { withCredentials: true }, {
           headers: {
             Authorization: "Bearer " + token,
           },
