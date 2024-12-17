@@ -6,17 +6,20 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
+  // State to hold login form data
   const [loginData, setLoginData] = useState({
     email: "",
     password: "",
   });
 
+  // Handle input changes and update state
   const handleInputChange = (e) => {
     setLoginData({ ...loginData, [e.target.name]: e.target.value });
   };
 
   const navigate = useNavigate();
 
+  // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
@@ -29,9 +32,9 @@ const Login = () => {
           password: "",
         });
         setTimeout(() => { 
-        //FIXME - The redirect ist not working, 
-        // but the login is successful, 
-        // if i redirect directly the localstorage is empty
+          // FIXME - The redirect is not working, 
+          // but the login is successful, 
+          // if I redirect directly the localStorage is empty
           navigate("/");
         }, 500);
         console.log("Before localStorage update");

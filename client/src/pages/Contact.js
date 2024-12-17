@@ -1,18 +1,20 @@
-import React, { useState, useRef } from "react";
-import logo from "../pictures/blog-images/work-4997565_1280.png";
-import emailjs from "@emailjs/browser";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useRef } from "react"; // Import necessary hooks from React
+import logo from "../pictures/blog-images/work-4997565_1280.png"; // Import the logo image
+import emailjs from "@emailjs/browser"; // Import emailjs for sending emails
+import { useNavigate } from "react-router-dom"; // Import useNavigate for navigation
 
 const Contact = () => {
+  // Initialize state for form data
   const [emailData, setEmailData] = useState({
     user_name: "",
     user_email: "",
     message: "",
   });
 
-  const form = useRef();
-  const navigate = useNavigate();
+  const form = useRef(); // Create a ref for the form
+  const navigate = useNavigate(); // Initialize navigate function
 
+  // Handle input changes and update state
   const handleInputChange = (e) => {
     setEmailData({
       ...emailData,
@@ -20,25 +22,28 @@ const Contact = () => {
     });
   };
 
+  // Handle form submission
   const handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault(); // Prevent default form submission
 
+    // Send email using emailjs
     emailjs
       .sendForm("service_1zg6p5s", "template_o3bkkuk", form.current, {
         publicKey: "tTRUGTPu9VXMH1cbC",
       })
       .then(
         () => {
-          console.log("SUCCESS!");
+          console.log("SUCCESS!"); // Log success message
+          // Reset form data
           setEmailData({
             user_name: "",
             user_email: "",
             message: "",
           });
-          navigate("/");
+          navigate("/"); // Navigate to home page
         },
         (error) => {
-          console.log("FAILED...", error.text);
+          console.log("FAILED...", error.text); // Log error message
         }
       );
   };
@@ -46,9 +51,9 @@ const Contact = () => {
   return (
     <>
       <div className="flex items-center justify-center min-h-screen p-4 text-white">
-        {/* Hauptcontainer */}
+        {/* Main container */}
         <div className="flex flex-col lg:flex-row gap-8 w-full max-w-6xl p-6 rounded-xl sm:p-10 dark:bg-gray-800 dark:text-gray-100">
-          {/* Linker Bereich: Titel, Beschreibung, Bild */}
+          {/* Left section: Title, description, image */}
           <div className="text-center lg:text-left lg:w-1/2">
             <h1 className="text-3xl md:text-4xl font-bold mb-4">Let's talk</h1>
             <p className="text-gray-400 mb-6">
@@ -61,7 +66,7 @@ const Contact = () => {
             />
           </div>
 
-          {/* Rechter Bereich: Formular */}
+          {/* Right section: Form */}
           <form
             ref={form}
             onSubmit={handleSubmit}

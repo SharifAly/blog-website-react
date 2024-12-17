@@ -15,9 +15,6 @@ const Blog = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 6;
 
-  // http://localhost:5000/blog/blog api from backend
-  // https://jsonplaceholder.typicode.com/posts dummy data
-
   // Fetch blog data from the server when the component mounts
   useEffect(() => {
     setLoading(true);
@@ -25,12 +22,12 @@ const Blog = () => {
       .get("http://localhost:5000/blog/blog")
       .then((res) => {
         setBlogData(res.data);
-        // console.log(res.data);
-        
+        // Set loading to false after data is fetched
         setLoading(false);
       })
       .catch((err) => {
         console.log(err);
+        // Set loading to false if there is an error
         setLoading(false);
       });
   }, []);
@@ -43,12 +40,13 @@ const Blog = () => {
   // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
+  // Show skeleton loader while loading
   if (loading) {
     return (
       <section className="dark:text-gray-100">
         <div className="container max-w-6xl p-10 mx-auto space-y-6 sm:space-y-12 dark:bg-gray-900 rounded-xl shadow-2xl">
-          <div className="grid grid-cols-1 gap-14 md:grid-cols-2 lg:grid-cols-4">
-            {Array.from({ length: 6 }).map((_, index) => (
+          <div className="grid grid-cols-1 gap-14 md:grid-cols-2 lg:grid-cols-3">
+            {Array.from({ length: 9 }).map((_, index) => (
               <SkeletonLoader key={index} />
             ))}
           </div>

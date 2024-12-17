@@ -8,12 +8,14 @@ const Navigation = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false); // State for login status
   const [isMenuOpen, setIsMenuOpen] = useState(false); // State for responsive menu toggle
 
+  // Function to handle logout
   const handleLogout = () => {
     localStorage.clear(); 
     Cookies.remove("token");
     setIsLoggedIn(false);
   };
 
+  // Check login status on component mount
   useEffect(() => {
     if (localStorage.getItem("loggedIn")) {
       setIsLoggedIn(true);
