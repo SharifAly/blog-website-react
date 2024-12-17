@@ -53,7 +53,7 @@ const Profile = () => {
       <div className="flex flex-col cols-1 justify-center items-center mt-4 gap-4">
         {/* <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2">Change Email</button>
         <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-2">Change Name</button> */}
-        <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Delete Account</button>
+        {/* <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Delete Account</button> */}
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import logo from "../pictures/logo/icons8-blogger-50 (1).png";
-import picture from "../pictures/blog-images/sharif.jpg";
+import picture from "../pictures/blog-images/avatar-1577909_640.png";
 import Cookies from "js-cookie";
 
 const Navigation = () => {
