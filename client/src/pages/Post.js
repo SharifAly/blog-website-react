@@ -4,6 +4,7 @@ import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 
 const Post = () => {
+  // State to manage post data
   const [postData, setPostData] = useState({
     title: "",
     category: "Choose a category",
@@ -11,10 +12,13 @@ const Post = () => {
     image: "null",
   });
 
+  // Retrieve token from local storage
   const token = localStorage.getItem("token");
 
+  // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
+    // Validate form fields
     if (postData.title === "") {
       toast("Please enter a title");
       return;
@@ -25,6 +29,7 @@ const Post = () => {
       toast("Please enter a text");
       return;
     } else {
+      // Send post data to server
       axios
         .post(
           "http://localhost:5000/blog/post",
@@ -38,6 +43,7 @@ const Post = () => {
         )
         .then(() => {
           toast("Posted Successfully");
+          // Reset form fields
           setPostData({
             title: "",
             category: "Choose a category",
@@ -55,6 +61,7 @@ const Post = () => {
     }
   };
 
+  // Handle input changes
   const handleInputChange = (e) => {
     setPostData({
       ...postData,
@@ -68,9 +75,9 @@ const Post = () => {
       <ToastContainer />
       <div className="text-white">
         <div className="flex items-center justify-center min-h-screen p-4">
-          {/* Hauptcontainer */}
+          {/* Main container */}
           <div className="flex flex-col lg:flex-row gap-8 justify-center w-full max-w-6xl p-6 rounded-xl sm:p-10 dark:bg-gray-900 dark:text-gray-100">
-            {/* Linker Bereich (Bild und Titel) */}
+            {/* Left section (Image and title) */}
             <div className="mb-8 text-center mx-auto lg:text-left lg:w-1/2">
               <h1 className="my-3 text-3xl md:text-4xl font-bold">
                 Post a new Story
@@ -82,7 +89,7 @@ const Post = () => {
               />
             </div>
 
-            {/* Rechter Bereich (Formular) */}
+            {/* Right section (Form) */}
             <form
               onSubmit={handleSubmit}
               className="space-y-8 w-full lg:w-1/2"

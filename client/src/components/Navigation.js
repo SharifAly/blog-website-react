@@ -5,14 +5,18 @@ import { logout, login } from "./authSlice";
 import logo from "../pictures/logo/icons8-blogger-50 (1).png";
 import picture from "../pictures/blog-images/avatar-1577909_640.png";
 import { toast } from "react-toastify";
-import Cookies from 'js-cookie';
 
 
 const Navigation = () => {
+  // State to manage the menu open/close status
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  // Get the login status from Redux store
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  // Local state to manage login status
   const [loggedIn, setLoggedIn] = useState(false);
+  // Get the user ID from Redux store
   const userId = useSelector((state) => state.auth.userId);
+  // Dispatch function to send actions to Redux store
   const dispatch = useDispatch();
   
 
@@ -38,7 +42,7 @@ const Navigation = () => {
     <div className="nav-container shadow-2xl">
       <nav className="shadow-md mb-10 bg-gray-800 text-white">
         <div className="flex items-center justify-between px-4 py-3">
-          {/* //FIXME - Fix the localStorage clear click on logo and logout  */}
+          {/* //FIXME - LocalStorage will cleared if i click on the logo to home page  */}
           {/* Logo */}
           <div className="flex items-center">
             <NavLink to="/" className="flex items-center text-2xl font-bold">
@@ -81,6 +85,7 @@ const Navigation = () => {
 
           {/* Navigation Links */}
           <div className="hidden lg:flex space-x-4">
+            
             <NavLink to="/blog" className="hover:text-gray-400 px-3 py-2 text-base font-medium">
               Blog
             </NavLink>

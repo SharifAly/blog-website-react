@@ -15,9 +15,6 @@ const Blog = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 9;
 
-  // http://localhost:5000/blog/blog api from backend
-  // https://jsonplaceholder.typicode.com/posts dummy data
-
   // Fetch blog data from the server when the component mounts
   useEffect(() => {
     setLoading(true);
@@ -25,8 +22,6 @@ const Blog = () => {
       .get("http://localhost:5000/blog/blog")
       .then((res) => {
         setBlogData(res.data);
-        // console.log(res.data);
-        
         setLoading(false);
       })
       .catch((err) => {
@@ -43,6 +38,7 @@ const Blog = () => {
   // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
+  // Show loading skeletons if data is still loading
   if (loading) {
     return (
       <section className="dark:text-gray-100">

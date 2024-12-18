@@ -6,30 +6,36 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
-
+  // State to store login data
   const [loginData, setLoginData] = useState({ email: "", password: "" });
+  // Redux dispatch function
   const dispatch = useDispatch();
 
-
-
+  // Handle input change and update state
   const handleInputChange = (e) => {
     setLoginData({ ...loginData, [e.target.name]: e.target.value });
   };
 
+  // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
       .post("http://localhost:5000/auth/login", loginData, { withCredentials: true })
       .then((res) => {
         console.log("Login successful:", res.data);
+        // Store user data in local storage
         localStorage.setItem("userId", res.data.userId);
         localStorage.setItem("loggedIn", true);
-        dispatch(login({ userId: res.data.userId })); // Redux-Action aufrufen
+        // Dispatch login action to Redux store
+        dispatch(login({ userId: res.data.userId }));
+        // Reset login form
         setLoginData({ email: "", password: "" });
+        // Show success toast notification
         toast.success("Login successful!");
       })
       .catch((err) => {
         console.error("Login failed:", err);
+        // Show error toast notification
         toast.error("Wrong email or password!");
       });
   };

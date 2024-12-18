@@ -4,15 +4,18 @@ import emailjs from "@emailjs/browser";
 import { useNavigate } from "react-router-dom";
 
 const Contact = () => {
+  // State to hold form data
   const [emailData, setEmailData] = useState({
     user_name: "",
     user_email: "",
     message: "",
   });
 
+  // Reference to the form element
   const form = useRef();
   const navigate = useNavigate();
 
+  // Handle input changes and update state
   const handleInputChange = (e) => {
     setEmailData({
       ...emailData,
@@ -20,6 +23,7 @@ const Contact = () => {
     });
   };
 
+  // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -46,9 +50,9 @@ const Contact = () => {
   return (
     <>
       <div className="flex items-center justify-center min-h-screen p-4 text-white">
-        {/* Hauptcontainer */}
+        {/* Main container */}
         <div className="flex flex-col lg:flex-row gap-8 w-full max-w-6xl p-6 rounded-xl sm:p-10 dark:bg-gray-800 dark:text-gray-100">
-          {/* Linker Bereich: Titel, Beschreibung, Bild */}
+          {/* Left section: Title, description, image */}
           <div className="text-center lg:text-left lg:w-1/2">
             <h1 className="text-3xl md:text-4xl font-bold mb-4">Let's talk</h1>
             <p className="text-gray-400 mb-6">
@@ -61,7 +65,7 @@ const Contact = () => {
             />
           </div>
 
-          {/* Rechter Bereich: Formular */}
+          {/* Right section: Form */}
           <form
             ref={form}
             onSubmit={handleSubmit}

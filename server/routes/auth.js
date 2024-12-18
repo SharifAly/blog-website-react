@@ -59,7 +59,7 @@ router.post("/login", async (req, res) => {
       // Set token in HTTP-only cookie
       res.cookie("token", token, {
         httpOnly: true,
-        maxAge: 10 * 60 * 60 * 1000, // 10 hours
+        maxAge: 2 * 60 * 60 * 1000, // 2 hours
       });
 
       return res.status(200).send({
