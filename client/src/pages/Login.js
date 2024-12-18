@@ -1,21 +1,20 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { login } from "../components/authSlice";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
-  const [loginData, setLoginData] = useState({
-    email: "",
-    password: "",
-  });
+
+  const [loginData, setLoginData] = useState({ email: "", password: "" });
+  const dispatch = useDispatch();
+
+
 
   const handleInputChange = (e) => {
     setLoginData({ ...loginData, [e.target.name]: e.target.value });
   };
-
-  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -23,26 +22,15 @@ const Login = () => {
       .post("http://localhost:5000/auth/login", loginData, { withCredentials: true })
       .then((res) => {
         console.log("Login successful:", res.data);
-        console.log("User ID:", res.data.userId); // Debugging log
-        setLoginData({
-          email: "",
-          password: "",
-        });
-        setTimeout(() => { 
-        //FIXME - The redirect ist not working, 
-        // but the login is successful, 
-        // if i redirect directly the localstorage is empty
-          navigate("/");
-        }, 500);
-        console.log("Before localStorage update");
-        localStorage.setItem("loggedIn", "true");
         localStorage.setItem("userId", res.data.userId);
-        console.log("After localStorage update");
-        window.location.reload(false);
+        localStorage.setItem("loggedIn", true);
+        dispatch(login({ userId: res.data.userId })); // Redux-Action aufrufen
+        setLoginData({ email: "", password: "" });
+        toast.success("Login successful!");
       })
       .catch((err) => {
-        console.error("Login failed:", err); // Debugging log
-        toast("Wrong email or password!");
+        console.error("Login failed:", err);
+        toast.error("Wrong email or password!");
       });
   };
 
@@ -74,13 +62,6 @@ const Login = () => {
                     <label htmlFor="password" className="text-sm">
                       Password
                     </label>
-                    <Link
-                      rel="noopener noreferrer"
-                      href="#"
-                      className="text-xs hover:underline dark:text-gray-400"
-                    >
-                      Forgot password?
-                    </Link>
                   </div>
                   <input
                     type="password"
@@ -94,23 +75,17 @@ const Login = () => {
                 </div>
               </div>
               <div className="space-y-2">
-                <div>
-                  <button
-                    type="submit"
-                    className="w-full px-8 py-3 font-semibold rounded-md dark:bg-violet-400 hover:dark:bg-violet-600 dark:text-gray-900"
-                  >
-                    Sign in
-                  </button>
-                </div>
+                <button
+                  type="submit"
+                  className="w-full px-8 py-3 font-semibold rounded-md dark:bg-violet-400 hover:dark:bg-violet-600 dark:text-gray-900"
+                >
+                  Sign in
+                </button>
                 <p className="px-6 text-sm text-center dark:text-gray-400">
-                  Don't have an account yet?
-                  <Link
-                    rel="noopener noreferrer"
-                    to="/register"
-                    className="hover:underline dark:text-violet-400"
-                  >
+                  Don't have an account yet?{" "}
+                  <a href="/register" className="hover:underline dark:text-violet-400">
                     Sign up
-                  </Link>
+                  </a>
                   .
                 </p>
               </div>
@@ -123,3 +98,4 @@ const Login = () => {
 };
 
 export default Login;
+

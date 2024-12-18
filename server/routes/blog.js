@@ -30,7 +30,7 @@ router.get("/latest", (req, res) => {
 
 // Route to create a new blog post
 router.post("/post", (req, res) => {
-  const { title, category, image, body } = req.body; // Get post details from request body
+  const { title, category, image, body, } = req.body; // Get post details from request body
   const sql =
     "INSERT INTO blog.posts (title, category, image, body, fk_user_id) VALUES (?,?,?,?,?)"; // SQL query to insert a new post
   const token = req.cookies.token; // Get JWT token from cookies

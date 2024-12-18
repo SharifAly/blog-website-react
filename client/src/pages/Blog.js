@@ -13,7 +13,7 @@ const Blog = () => {
 
   // State for pagination
   const [currentPage, setCurrentPage] = useState(1);
-  const postsPerPage = 6;
+  const postsPerPage = 9;
 
   // http://localhost:5000/blog/blog api from backend
   // https://jsonplaceholder.typicode.com/posts dummy data
@@ -47,8 +47,8 @@ const Blog = () => {
     return (
       <section className="dark:text-gray-100">
         <div className="container max-w-6xl p-10 mx-auto space-y-6 sm:space-y-12 dark:bg-gray-900 rounded-xl shadow-2xl">
-          <div className="grid grid-cols-1 gap-14 md:grid-cols-2 lg:grid-cols-4">
-            {Array.from({ length: 6 }).map((_, index) => (
+          <div className="grid grid-cols-1 gap-14 md:grid-cols-2 lg:grid-cols-3">
+            {Array.from({ length: 9 }).map((_, index) => (
               <SkeletonLoader key={index} />
             ))}
           </div>
@@ -62,6 +62,23 @@ const Blog = () => {
       <section className="dark:text-gray-100">
         <div className="container max-w-6xl p-10 mx-auto space-y-6 sm:space-y-12 dark:bg-gray-900 rounded-xl shadow-2xl">
           {/* Blog Posts */}
+          <div className="flex justify-center space-x-2">
+            {Array.from({ length: Math.ceil(blogData.length / postsPerPage) }).map(
+              (_, index) => (
+                <button
+                  key={index}
+                  onClick={() => paginate(index + 1)}
+                  className={`px-3 py-1 rounded ${
+                    currentPage === index + 1
+                      ? "bg-blue-600 text-white"
+                      : "bg-gray-200 text-gray-800"
+                  }`}
+                >
+                  {index + 1}
+                </button>
+              )
+            )}
+          </div>
           <div className="grid grid-cols-1 gap-14 md:grid-cols-2 lg:grid-cols-3">
             {currentPosts.map((post) => (
               <article key={post.id} className="flex flex-col dark:bg-gray-900">
