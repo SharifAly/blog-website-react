@@ -20,6 +20,7 @@ const Navigation = () => {
   const dispatch = useDispatch();
   
 
+  // Check login status on component mount
   useEffect(() => {
     // Check localStorage and sync with Redux state
     const storedUserId = localStorage.getItem("userId");

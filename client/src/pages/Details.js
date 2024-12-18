@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { useParams } from "react-router-dom";
+import React, { useState, useEffect } from "react"; // Import necessary hooks from React
+import axios from "axios"; // Import axios for making HTTP requests
+import { useParams } from "react-router-dom"; // Import useParams to get URL parameters
 
 const Details = () => {
   // State to hold post data
@@ -18,15 +18,15 @@ const Details = () => {
   // Fetch post data when the component mounts or the ID changes
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/blog/details/${id}`)
+      .get(`http://localhost:5000/blog/details/${id}`) // Make a GET request to fetch post details
       .then((res) => {
-        setPostData(res.data);
-        console.log(res.data);
+        setPostData(res.data); // Update state with fetched data
+        console.log(res.data); // Log the fetched data
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err); // Log any errors
       });
-  }, [id]);
+  }, [id]); // Dependency array to re-run effect when ID changes
 
   return (
     <div>

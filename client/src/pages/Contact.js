@@ -1,7 +1,7 @@
-import React, { useState, useRef } from "react";
-import logo from "../pictures/blog-images/work-4997565_1280.png";
-import emailjs from "@emailjs/browser";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useRef } from "react"; // Import necessary hooks from React
+import logo from "../pictures/blog-images/work-4997565_1280.png"; // Import the logo image
+import emailjs from "@emailjs/browser"; // Import emailjs for sending emails
+import { useNavigate } from "react-router-dom"; // Import useNavigate for navigation
 
 const Contact = () => {
   // State to hold form data
@@ -25,24 +25,26 @@ const Contact = () => {
 
   // Handle form submission
   const handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault(); // Prevent default form submission
 
+    // Send email using emailjs
     emailjs
       .sendForm("service_1zg6p5s", "template_o3bkkuk", form.current, {
         publicKey: "tTRUGTPu9VXMH1cbC",
       })
       .then(
         () => {
-          console.log("SUCCESS!");
+          console.log("SUCCESS!"); // Log success message
+          // Reset form data
           setEmailData({
             user_name: "",
             user_email: "",
             message: "",
           });
-          navigate("/");
+          navigate("/"); // Navigate to home page
         },
         (error) => {
-          console.log("FAILED...", error.text);
+          console.log("FAILED...", error.text); // Log error message
         }
       );
   };

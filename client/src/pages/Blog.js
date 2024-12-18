@@ -26,6 +26,7 @@ const Blog = () => {
       })
       .catch((err) => {
         console.log(err);
+        // Set loading to false if there is an error
         setLoading(false);
       });
   }, []);

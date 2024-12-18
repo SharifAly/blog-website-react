@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <footer className="dark:text-gray-50">
       <div className="container mx-auto p-4 md:p-8">
-        {/* Grid Layout für bessere Responsivität */}
+        {/* Grid Layout for better responsiveness */}
         <div className="grid grid-cols-1 gap-6 text-center md:grid-cols-2 lg:flex lg:justify-between lg:items-center">
           {/* Copyright Section */}
           <div className="flex justify-center items-center">
